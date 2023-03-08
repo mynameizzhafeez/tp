@@ -98,6 +98,12 @@ public class DeleteCommandTest {
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
     }
 
+    @Test
+    public void tostring() {
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        assertTrue(deleteCommand.toString().contains(INDEX_FIRST_PERSON.toString()));
+    }
+
     /**
      * Updates {@code model}'s filtered list to show no one.
      */

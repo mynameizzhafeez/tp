@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.ALBERT;
@@ -145,5 +144,12 @@ public class FindCommandTest {
     private ContainsKeywordsPredicate preparePredicate(String userInput, Prefix prefix) {
         return new ContainsKeywordsPredicate(
                 Arrays.asList(userInput.split("\\s+")), prefix);
+    }
+
+    @Test
+    public void tostring() {
+        ContainsKeywordsPredicate predicate = preparePredicate("@kevinho @jookoon @isaacnewton", Prefix.TELEGRAM_HANDLE);
+        FindCommand findCommand = new FindCommand(predicate);
+        assertTrue(findCommand.toString().contains(predicate.toString()));
     }
 }

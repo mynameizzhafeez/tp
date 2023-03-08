@@ -77,6 +77,13 @@ public class AddCommandTest {
         assertFalse(addAlbertCommand.equals(addBartCommand));
     }
 
+    @Test
+    public void tostring() {
+        Person albert = new PersonBuilder().withName("Albert").build();
+        AddCommand addCommand = new AddCommand(albert);
+        assertTrue(addCommand.toString().contains(albert.toString()));
+    }
+
     /**
      * A default model stub that have all of the methods failing.
      */

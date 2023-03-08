@@ -76,4 +76,9 @@ public class SortCommand extends Command {
                 || (other instanceof SortCommand // instanceof handles nulls
                 && comparatorDesc.equals(((SortCommand) other).comparatorDesc));
     }
+
+    @Override
+    public String toString() {
+        return String.format("<SortCommand: %s>", comparatorDesc);
+    }
 }

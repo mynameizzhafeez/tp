@@ -67,4 +67,8 @@ public class ContainsKeywordsPredicate implements Predicate<Person> {
         }
     }
 
+    @Override
+    public String toString() {
+        return String.format("<ContainsKeywordsPredicate: %s %s>", prefix.toString(), keywords.toString());
+    }
 }

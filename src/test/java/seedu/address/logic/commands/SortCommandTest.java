@@ -74,4 +74,11 @@ public class SortCommandTest {
             assertTrue(comparator.compare(personList.get(i), personList.get(i + 1)) <= 0);
         }
     }
+
+    @Test
+    public void tostring() {
+        String desc = "desc";
+        SortCommand sortCommand = new SortCommand(NAME_COMPARATOR, desc);
+        assertTrue(sortCommand.toString().contains(desc));
+    }
 }

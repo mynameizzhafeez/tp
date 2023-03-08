@@ -2,13 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_BEN;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_ALEX;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_BEN;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_BEN;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_BEN;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_BEN;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_1;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 
 import org.junit.jupiter.api.Test;
 
@@ -54,5 +48,16 @@ public class EditPersonDescriptorTest {
         // different tags -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_ALEX).withGroupTags(VALID_GROUP_1).build();
         assertFalse(DESC_ALEX.equals(editedAmy));
+    }
+
+    @Test
+    public void tostring() {
+        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptorBuilder(DESC_ALEX)
+                .withEmail(EMAIL_BEN).build();
+        assertTrue(editPersonDescriptor.toString().contains(ADDRESS_ALEX));
+        assertTrue(editPersonDescriptor.toString().contains(PHONE_ALEX));
+        assertTrue(editPersonDescriptor.toString().contains(TELEGRAM_HANDLE_ALEX));
+        assertTrue(editPersonDescriptor.toString().contains(NAME_ALEX));
+        assertTrue(editPersonDescriptor.toString().contains(EMAIL_BEN));
     }
 }

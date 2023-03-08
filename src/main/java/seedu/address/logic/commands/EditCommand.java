@@ -315,5 +315,23 @@ public class EditCommand extends Command {
                     && getGroupTags().equals(e.getGroupTags())
                     && getModuleTags().equals(e.getModuleTags());
         }
+
+        @Override
+        public String toString() {
+            return String.format(
+                    "<EditPersonDescriptor: %s %s %s %s %s %s %s>",
+                    getName().toString(),
+                    getPhone().toString(),
+                    getEmail().toString(),
+                    getAddress().toString(),
+                    getTelegramHandle().toString(),
+                    getGroupTags().toString(),
+                    getModuleTags().toString());
+        }
+    }
+
+    @Override
+    public String toString() {
+        return String.format("<EditCommand: %s %s>", index.toString(), editPersonDescriptor.toString());
     }
 }

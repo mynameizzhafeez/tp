@@ -20,4 +20,14 @@ public class ClearCommand extends Command {
         model.setEduMate(new EduMate());
         return new CommandResult(MESSAGE_SUCCESS);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other instanceof ClearCommand;
+    }
+
+    @Override
+    public String toString() {
+        return "<ClearCommand>";
+    }
 }

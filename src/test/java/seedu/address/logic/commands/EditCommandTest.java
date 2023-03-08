@@ -189,6 +189,12 @@ public class EditCommandTest {
     }
 
     @Test
+    public void tostring() {
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, DESC_ALEX);
+        assertTrue(editCommand.toString().contains(DESC_ALEX.toString()));
+    }
+
+    @Test
     public void equals_sameObject_true() {
         assertEquals(EDIT_PERSON_DESCRIPTOR, EDIT_PERSON_DESCRIPTOR);
     }

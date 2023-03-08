@@ -21,4 +21,14 @@ public class ListCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other instanceof ListCommand;
+    }
+
+    @Override
+    public String toString() {
+        return "<ListCommand>";
+    }
 }
