@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.results;
 
 import static java.util.Objects.requireNonNull;
 
@@ -11,27 +11,11 @@ public class CommandResult {
 
     private final String feedbackToUser;
 
-    /** Help information should be shown to the user. */
-    private final boolean isShowHelp;
-
-    /** The application should exit. */
-    private final boolean isExit;
-
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean isShowHelp, boolean isExit, boolean isShowUserProfile) {
-        this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.isShowHelp = isShowHelp;
-        this.isExit = isExit;
-    }
-
-    /**
-     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
-     * and other fields set to their default value.
-     */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false);
+        this.feedbackToUser = requireNonNull(feedbackToUser);
     }
 
     public String getFeedbackToUser() {
@@ -39,11 +23,11 @@ public class CommandResult {
     }
 
     public boolean isShowHelp() {
-        return isShowHelp;
+        return false;
     }
 
     public boolean isExit() {
-        return isExit;
+        return false;
     }
 
 
@@ -60,13 +44,13 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && isShowHelp == otherCommandResult.isShowHelp
-                && isExit == otherCommandResult.isExit;
+                && isShowHelp() == otherCommandResult.isShowHelp()
+                && isExit() == otherCommandResult.isExit();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, isShowHelp, isExit);
+        return Objects.hash(feedbackToUser, isShowHelp(), isExit());
     }
 
 }
