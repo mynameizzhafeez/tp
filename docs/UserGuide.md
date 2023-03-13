@@ -39,32 +39,33 @@ If this is the first time you are using this user guide, we highly recommend you
       6. [**Group**](#group)
       7. [**Module**](#module)
    3. [**Basic Commands**](#basic-commands)
-      1. [**Exit the application**](#exit-the-application)
-      2. [**View help**](#view-help)
-      3. [**Add a contact**](#add-a-contact)
-      4. [**View a contact's profile**](#view-a-contacts-profile)
-      5. [**Edit a contact's details**](#edit-a-contacts-details)
-      6. [**Delete a contact**](#delete-a-contact)
-      7. [**Add or remove a label from a contact**](#add-or-remove-a-label-from-a-contact)
+      1. [**Exit the application `exit`**](#exit-the-application-exit)
+      2. [**Get help `help`**](#get-help-help)
+      3. [**List all contacts `list`**](#list-all-contacts-list)
+      4. [**Add a contact `add`**](#add-a-contact-add)
+      5. [**View a contact's profile `view`**](#view-a-contacts-profile-view)
+      6. [**Edit a contact's details `edit`**](#edit-a-contacts-details-edit)
+      7. [**Delete a contact `delete`**](#delete-a-contact-delete)
+      8. [**Add or remove a label from a contact `add`**](#add-or-remove-a-label-from-a-contact-tag)
    4. [**Search Commands**](#search-commands)
-      1. [**Find contacts that match your criteria**](#find-contacts-that-match-your-criteria)
-      2. [**Sort contacts based on your criteria**](#sort-contacts-based-on-your-criteria)
+      1. [**Find contacts that match your criteria `find`**](#find-contacts-that-match-your-criteria-find)
+      2. [**Sort contacts based on your criteria `sort`**](#sort-contacts-based-on-your-criteria-sort)
    5. [**Storage Commands**](#storage-commands)
-      1. [**Save a copy of EduMate**](#save-a-copy-of-edumate)
-      2. [**Load a copy of EduMate**](#load-a-copy-of-edumate)
+      1. [**Save a copy of EduMate `save`**](#save-a-copy-of-edumate-save)
+      2. [**Load a copy of EduMate `load`**](#load-a-copy-of-edumate-load)
    6. [**Meet Commands**](#meet-commands)
-      1. [**Suggest places to meet with your contacts**](#suggest-places-to-meet-with-your-contacts)
+      1. [**Suggest places to meet with your contacts `meet`**](#suggest-places-to-meet-with-your-contacts-meet)
    7. [**Advanced Commands**](#advanced-commands)
-      1. [**View your past command history**](#view-your-past-command-history)
+      1. [**View your past command history `history`**](#view-your-past-command-history-history)
    8. [**Miscellaneous Commands**](#miscellaneous-commands)
-      1. [**Clear the contents of EduMate**](#clear-the-contents-of-edumate)
-      2. [**Generate a random EduMate**](#generate-a-random-edumate)
-7. [**FAQ**]()
-8. [**Summary**]()
-   1. [**Prefixes**]()
-   2. [**Command Summary**]()
-9. [**Troubleshooting**]()
-   1. [**How to check your Java version**]()
+      1. [**Clear the contents of EduMate `clear`**](#clear-the-contents-of-edumate-clear)
+      2. [**Generate a random EduMate `sample`**](#generate-a-random-edumate-sample)
+7. [**FAQ**](#faq)
+8. [**Summary**](#summary)
+   1. [**Prefixes**](#prefixes)
+   2. [**Command Summary**](#command-summary)
+9. [**Troubleshooting**](#troubleshooting)
+   1. [**How to check your Java version**](#how-to-check-your-java-version)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -273,7 +274,7 @@ Example: `m/CS2107`
 
 ## Basic Commands
 
-### Exit the application
+### Exit the application `exit`
 
 Shows a message explaining how to access the help page.
 
@@ -288,7 +289,7 @@ What you should see:<br>
 
 Examples:
 
-### View help
+### Get help `help`
 
 Shows a message explaining how to access the help page.
 
@@ -304,7 +305,7 @@ What you should see:<br>
 
 Examples:
 
-### List all contacts
+### List all contacts `list`
 
 Shows a message explaining how to access the help page.
 
@@ -587,7 +588,12 @@ Examples:
 **A**: It will not be in v1.02, but it may be possible for future iterations.
 
 
-## Command summary
+## Summary
+
+### Prefixes
+{fill in}
+
+### Command Summary
 
 | Action            | Format, Examples                                                                      |
 |-------------------|---------------------------------------------------------------------------------------|
@@ -599,4 +605,9 @@ Examples:
 | **Filter By Mod** | `filter m/MODULE_TAG` <br> e.g., `filter m/CS2103T`                                   |
 | **Sort**          | `sort`                                                                                |
 | **View**          | `view`<br/> `view <index>`<br/>`view n/NAME`<br/>e.g., `view 5` or `view n/Komyo San` |
+
+## Troubleshooting
+
+### How to check your Java version
+{fill in}
 
