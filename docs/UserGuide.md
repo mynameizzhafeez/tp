@@ -46,7 +46,7 @@ If this is the first time you are using this user guide, we highly recommend you
       5. [**View a contact's profile `view`**](#view-a-contacts-profile-view)
       6. [**Edit a contact's details `edit`**](#edit-a-contacts-details-edit)
       7. [**Delete a contact `delete`**](#delete-a-contact-delete)
-      8. [**Add or remove a label from a contact `add`**](#add-or-remove-a-label-from-a-contact-tag)
+      8. [**Add or remove a label from a contact `tag`**](#add-or-remove-a-label-from-a-contact-tag)
    4. [**Search Commands**](#search-commands)
       1. [**Find contacts that match your criteria `find`**](#find-contacts-that-match-your-criteria-find)
       2. [**Sort contacts based on your criteria `sort`**](#sort-contacts-based-on-your-criteria-sort)
@@ -169,25 +169,39 @@ Do also ensure that you have Java `11` or above installed in your Computer. If y
 
 ## Commands
 
-{to be filled in}
+| Command   | Description                                                                                  |
+|-----------|----------------------------------------------------------------------------------------------|
+| `exit`    | [Exit the application](#exit-the-application-exit)                                           |
+| `help`    | [Get help](#get-help-help)                                                                   |
+| `list`    | [List all contacts](#list-all-contacts-list)                                                 |
+| `add`     | [Add a contact](#add-a-contact-add)                                                          |
+| `view`    | [View a contact's profile](#view-a-contacts-profile-view)                                    |
+| `edit`    | [Edit a contact's details](#edit-a-contacts-details-edit)                                    |
+| `delete`  | [Delete a contact](#delete-a-contact-delete)                                                 |
+| `tag`     | [Add or remove a label from a contact](#add-or-remove-a-label-from-a-contact-tag)            |
+| `find`    | [Find contacts that match your criteria](#find-contacts-that-match-your-criteria-find)       |
+| `sort`    | [Sort contacts based on your criteria](#sort-contacts-based-on-your-criteria-sort)           |
+| `save`    | [Save a copy of EduMate](#save-a-copy-of-edumate-save)                                       |
+| `load`    | [Load a copy of EduMate](#load-a-copy-of-edumate-load)                                       |
+| `meet`    | [Suggest places to meet with your contacts](#suggest-places-to-meet-with-your-contacts-meet) |
+| `history` | [View your past command history](#view-your-past-command-history-history)                    |
+| `clear`   | [Clear the contents of EduMate](#clear-the-contents-of-edumate-clear)                        |
+| `sample`  | [Generate a random EduMate](#generate-a-random-edumate-sample)                               |
 
 ### How to interpret the command format
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Basic Command Format**<br>
+**:information_source: Basic Command Formats**<br>
 
 * The first word is the type of command that you are running.<br>
   e.g. for the command `delete 5`, we are running the `delete` command.
 
-* We use [Prefixes]() like `p/` and `g/` to label our arguments for the command. Additionally, we use numbers to specify the index of contacts in our list.<br>
+* We use [Prefixes]() like `p/` and `g/` to label our arguments for the command. Additionally, we use `z/` to denote any prefix.<br>
   e.g. `edit 2 n/Steven Tan` runs the `edit` command with an index of 2 and an `n/` argument of Steven Tan.
 
 * Words in `UPPER_CASE` are arguments you are meant to fill in.<br>
   e.g. in `view n/NAME`, you can fill in the `NAME` argument like `view n/Tan Kah Kee`.
-
-* We use `z/` to denote any prefix.<br>
-  e.g. `z/FIELD` could mean `n/NAME` or `a/ADDRESS`.
 
 * Items in square brackets are optional.<br>
   e.g. `n/NAME [g/GROUP]` can be used as `n/Tan Kah Kee g/Friend` or as `n/Tan Kah Kee`.
@@ -195,11 +209,14 @@ Do also ensure that you have Java `11` or above installed in your Computer. If y
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[m/MODULE]…​` can be used as ` ` (i.e. 0 times), `m/`, `m/CS2108 m/CS2101` etc.
 
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Additional Command Formats**<br>
+
 * Unless otherwise specified, arguments can be in any order.<br>
   e.g. if the command specifies `n/NAME a/ADDRESS`, `a/ADDRESS n/NAME` is also acceptable.
-
-* If an argument is expected only once in the command, but you specified it multiple times, only the **last** occurrence of the argument will be taken.<br>
-  e.g. `p/86544145 p/81353055` will be interpreted as `p/81353055`.
 
 * Unnecessary arguments will be ignored.<br>
   e.g. `help 123` will be interpreted as `help`.
@@ -582,7 +599,7 @@ Loads the contents of a save file into EduMate.
 </div>
 
 Formats:
-*
+* `load FILE_NAME`: Loads the EduMate from a file called `FILE_NAME.json`.
 
 What you should see:<br>
 {GUI}<br>
@@ -690,20 +707,39 @@ Examples:
 ## Summary
 
 ### Prefixes
-{fill in}
+
+These prefixes are for labelling arguments when you run our commands.
+
+| Prefix | Meaning         | Usage                                                                                          | Example             |
+|--------|-----------------|------------------------------------------------------------------------------------------------|---------------------|
+| `n/`   | Name            | A string that does not contain special characters                                              | `n/Wen Li`          |
+| `p/`   | Phone number    | A number with a length of at least 3                                                           | `p/89229358`        |
+| `e/`   | Email           | A valid email with a local part and a domain                                                   | `e/wenli@gmail.com` |
+| `t/`   | Telegram handle | A telegram handle starting with `@`                                                            | `t/@wenli`          |
+| `a/`   | Address         | The name of an MRT station in Singapore                                                        | `a/Boon Lay`        |
+| `g/`   | Group           | A string that does not contain special characters                                              | `g/Friend`          |
+| `m/`   | Module          | A valid module code with a 2-4 letter prefix, a 4 number middle portion and an optional suffix | `m/CS2103T`         |
 
 ### Command Summary
 
-| Action            | Format, Examples                                                                      |
-|-------------------|---------------------------------------------------------------------------------------|
-| **User**          | `user`                                                                                |
-| **Add Person**    | `add n/NAME` <br> e.g., `add n/John Doe`                                              |
-| **Delete Person** | `delete n/NAME`<br> e.g., `delete n/John Doe`                                         |
-| **Tag Module**    | `tag n/NAME m/MODULE_TAG`<br> e.g.,`tag n/John Doe m/CS2103T`                         |
-| **Untag Module**  | `untag n/NAME m/MODULE_TAG`<br> e.g., `untag n/John Doe m/CS2103T`                    |
-| **Filter By Mod** | `filter m/MODULE_TAG` <br> e.g., `filter m/CS2103T`                                   |
-| **Sort**          | `sort`                                                                                |
-| **View**          | `view`<br/> `view <index>`<br/>`view n/NAME`<br/>e.g., `view 5` or `view n/Komyo San` |
+| Action                                                            | Format                                               | Example                                                                |
+|-------------------------------------------------------------------|------------------------------------------------------|------------------------------------------------------------------------|
+| [exit](#exit-the-application-exit)                                | `exit`                                               | `exit`                                                                 |
+| [help](#get-help-help)                                            | `help`                                               | `help`                                                                 |
+| [list](#list-all-contacts-list)                                   | `list`                                               | `list`                                                                 |
+| [add](#add-a-contact-add)                                         | `add z/…​`                                           | `add n/Wen Qing p/87746543 e/wenqing@gmail.com t/@wenqing a/Boon Keng` |
+| [view](#view-a-contacts-profile-view)                             | `view INDEX`, `view n/NAME`                          | `view 5`, `view n/Wen Qing`                                            |
+| [edit](#edit-a-contacts-details-edit)                             | `edit INDEX z/FIELD`, `edit z/FIELD`                 | `edit 3 n/Wen Qing`, `edit p/87746543`                                 |
+| [delete](#delete-a-contact-delete)                                | `delete INDEX`                                       | `delete 6`                                                             |
+| [tag/untag](#add-or-remove-a-label-from-a-contact-tag)            | `tag`                                                | `tag 4 g/Friend`, `tag m/CS1231S`                                      |                                     |
+| [find](#find-contacts-that-match-your-criteria-find)              | `find z/KEYWORD`                                     | `find n/Tan`                                                           |
+| [sort](#sort-contacts-based-on-your-criteria-sort)                | `sort [z/]…​`, `sort [z/a]…​`, `sort [z/d]…​`        | `sort n/d`, `sort g/ p/d`                                              |
+| [save](#save-a-copy-of-edumate-save)                              | `save FILE_NAME`                                     | `save backup`                                                          |
+| [load](#load-a-copy-of-edumate-load)                              | `load FILE_NAME`                                     | `load backup`                                                          |
+| [meet/eat/study](#suggest-places-to-meet-with-your-contacts-meet) | `meet [INDEX]…​`, `eat [INDEX]…​`, `study [INDEX]…​` | `meet 1 4 6`, `eat 7 2 4`, `study 6 4 5`                               |
+| [history](#view-your-past-command-history-history)                | `history`                                            | `history`                                                              |
+| [clear](#clear-the-contents-of-edumate-clear)                     | `clear`                                              | `clear`                                                                |
+| [sample](#generate-a-random-edumate-sample)                       | `sample SIZE`                                        | `sample 45`                                                            |
 
 ## Troubleshooting
 
