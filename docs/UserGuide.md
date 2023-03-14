@@ -186,6 +186,9 @@ Do also ensure that you have Java `11` or above installed in your Computer. If y
 * Words in `UPPER_CASE` are arguments you are meant to fill in.<br>
   e.g. in `view n/NAME`, you can fill in the `NAME` argument like `view n/Tan Kah Kee`.
 
+* We use `z/` to denote any prefix.<br>
+  e.g. `z/FIELD` could mean `n/NAME` or `a/ADDRESS`.
+
 * Items in square brackets are optional.<br>
   e.g. `n/NAME [g/GROUP]` can be used as `n/Tan Kah Kee g/Friend` or as `n/Tan Kah Kee`.
 
@@ -205,7 +208,7 @@ Do also ensure that you have Java `11` or above installed in your Computer. If y
 
 <div markdown="block" class="alert alert-danger">
 
-**:danger: Invalid Command Formats**<br>
+**:warning: Invalid Command Formats**<br>
 
 * Indices must be positive numbers.<br>
   e.g. `delete one` is not an accepted command.
@@ -278,26 +281,37 @@ Example: `m/CS2107`
 
 Shows a message explaining how to access the help page.
 
-When to use:
-*
+<div markdown="block" class="alert alert-info">
+
+:information_source: You can use this if:
+* you want to end the program.
+* you are done using EduMate.
+
+</div>
 
 Formats:
 * `exit`
-<br>
+
 What you should see:<br>
 {Explanation}
 
 Examples:
+* `exit`
 
 ### Get help `help`
 
 Shows a message explaining how to access the help page.
 
-When to use:
-*
+<div markdown="block" class="alert alert-info">
+
+:information_source: You can use this if:
+* you are unsure of how to use EduMate.
+* you need a refresher on how to use EduMate's commands.
+
+</div>
 
 Formats:
-*
+* `help`
 
 What you should see:<br>
 ![help message](images/helpMessage.png)<br>
@@ -309,12 +323,15 @@ Examples:
 
 Shows a message explaining how to access the help page.
 
-When to use:
-*
+<div markdown="block" class="alert alert-info">
+
+:information_source: You can use this if:
+* you want to view all your contacts at once.
+
+</div>
 
 Formats:
 * `list`
-  <br>
 
 What you should see:<br>
 {GUI}
@@ -326,8 +343,12 @@ Examples:
 
 Adds a contact to the EduMate.
 
-When to use:
-* 
+<div markdown="block" class="alert alert-info">
+
+:information_source: You can use this if:
+* you want to add a new contact to your list.
+
+</div>
 
 Formats:
 * `add n/NAME p/PHONE a/ADDRESS e/EMAIL t/TELEGRAM [g/GROUP]…​ [m/MODULE]…​`: {fill in}
@@ -337,7 +358,7 @@ What you should see:<br>
 {Explanation}
 
 Examples:
-* `add n/Wen Li p/89229358 a/Boon Lay e/wenli@gmail.com t/@wenli g/Groupmate m/CS2101 m/CS2107` adds a contact with the following details:
+* `add n/Wen Li p/89229358 a/Boon Lay e/wenli@gmail.com t/@wenli g/Groupmate m/CS2101 m/CS2107`: Adds a contact with the following details:
   * Name: `Wen Li`
   * Phone number: `89229358`
   * Address: `Boon Lay`
@@ -350,8 +371,13 @@ Examples:
 
 You can use the view command to look up their current information, or their contact's information on the Panel to the right.
 
-When to use:
-* 
+<div markdown="block" class="alert alert-info">
+
+:information_source: You can use this if:
+* you want to view the profile of a particular contact in the list.
+* you want to view your information.
+
+</div>
 
 Formats:
 * `view`: Views your profile.
@@ -360,20 +386,20 @@ Formats:
 
 What you should see:<br>
 
-|                                `view`                                |
-|:--------------------------------------------------------------------:|
-| <img src='images/userprofile.png' style="width:50vw; margin:0 15vw"> |
-|              User's own profile displayed on the panel               |
+|                               `view`                               |
+|:------------------------------------------------------------------:|
+| <img src='images/userprofile.png' style="width:50%; margin:0 25%"> |
+|             User's own profile displayed on the panel              |
 
 |                                     `view 5`                                     |
 |:--------------------------------------------------------------------------------:|
-|   <img src='images/fifthPersonProfile.png' style="width:50vw; margin:0 15vw">    |
+|    <img src='images/fifthPersonProfile.png' style="width:50%; margin:0 25%">     |
 | The profile of the 5th person indexed by EduMate will be displayed on the panel. |
 
-|                        `view n/Charles Windsor`                         |
-|:-----------------------------------------------------------------------:|
-| <img src='images/charlesWindsor.png' style="width:50vw; margin:0 15vw"> |
-|     The profile of Charles Windsor will be displayed on the panel.      |
+|                       `view n/Charles Windsor`                        |
+|:---------------------------------------------------------------------:|
+| <img src='images/charlesWindsor.png' style="width:50%; margin:0 25%"> |
+|    The profile of Charles Windsor will be displayed on the panel.     |
 
 Examples:
 
@@ -382,40 +408,59 @@ Examples:
 
 Edits the profile of a contact.
 
-When to use:
-*
+<div markdown="block" class="alert alert-info">
+
+:information_source: You can use this if:
+* you want to edit a particular field of a contact in the list.
+* you want to edit several fields of a contact in the list.
+
+</div>
 
 Formats:
-* 
+* `edit z/`: Edits the `z` field for your profile.
+* `edit INDEX z/FIELD`: Edits the `z` field for the contact at the specified `INDEX`.
+* `edit INDEX [z/FIELD]…​`: Edits multiple fields at the same time.
 
 What you should see:<br>
 {GUI}<br>
 {Explanation}
 
 Examples:
+* `edit p/89229358`: Changes your phone number to `89229358`.
+* `edit 4 n/Wen Qing`: Changes the name of the fourth contact to `Wen Qing`.
+* `edit 3 p/89229358, a/Boon Lay`: Changes the phone and address of the third contact.
 
 ### Delete a contact `delete`
 
 Edits the profile of a contact.
 
-When to use:
-*
+<div markdown="block" class="alert alert-info">
+
+:information_source: You can use this if:
+* you no longer want a contact in the EduMate.
+
+</div>
 
 Formats:
-*
+* `delete INDEX`: removes the contact at the specified `INDEX`.
 
 What you should see:<br>
 {GUI}<br>
 {Explanation}
 
 Examples:
+* `delete 4`: removes the fourth contact from the EduMate.
 
 ### Add or remove a label from a contact `tag`
 
 Edits the profile of a contact.
 
-When to use:
+<div markdown="block" class="alert alert-info">
+
+:information_source: You can use this if:
 *
+
+</div>
 
 Formats:
 *
@@ -432,8 +477,12 @@ Examples:
 
 Finds persons whose specified fields contain any of the given keywords.
 
-When to use:
+<div markdown="block" class="alert alert-info">
+
+:information_source: You can use this if:
 *
+
+</div>
 
 Formats:
 * `find PREFIX/KEYWORD [MORE_KEYWORDS]`
@@ -460,44 +509,77 @@ Examples:
 
 ### Sort contacts based on your criteria `sort`
 
-Edits the profile of a contact.
+Sorts contacts in the list by certain criteria. For example, you could sort the contacts by phone number and their names.
 
-When to use:
-*
+<div markdown="block" class="alert alert-info">
+
+:information_source: You can use this if:
+* 
+
+</div>
 
 Formats:
-*
+* `sort`: Sorts the contacts based on their index in the EduMate.
+* `sort z/a`: Sorts by the `z` field in **ascending order**.
+* `sort z/d`: Sorts by the `z` field in **descending order**.
+* `sort z/`: Sorts by the `z` field in its **default ordering**.
+* `sort z1/ z2/`: Sorts by the `z1` field, then if two contacts have the same `z1` field, sort by the `z2` field.
+* `sort [z/]…​`:  Sorts by multiple conditions.
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: Here is how we compare the fields:
+* The `NAME`, `PHONE`, `ADDRESS`, `EMAIL` and `TELEGRAM` attributes are sorted in alphabetical order. By default, we sort in **ascending order**.
+* For the `GROUP` attribute, we sort contacts based on the number of groups they are part of. By default, we sort in **descending order**.<br>
+  e.g. if Alex has 2 groups `TA` and `NS`, and Ben has 1 group `NS`, Alex will appear before Ben in the default ordering.
+* For the `MODULE` attribute, we sort contacts based on the number of modules they share with you. By default, we sort in **descending order**.<br>
+  e.g. if Alex has 2 modules `CS1231S` and `CS1101S`, Ben has 2 modules `CS1231S` and `MA2001`, and you have 2 modules `CS1101S` and `MA1521`, then Alex has 1 common module while Ben has no common modules, so Alex will appear before Ben in the default ordering.
+
+</div>
 
 What you should see:<br>
 {GUI}<br>
 {Explanation}
 
 Examples:
+* `sort n/d`: Sorts contacts by name in **descending order**.
+* `sort a/a`: Sorts contacts by address in **ascending order**.
+* `sort g/d n/d`: Sorts contacts by **descending** number of groups, using the names as tie breaks.
 
 ## Storage Commands
 
 ### Save a copy of EduMate `save`
 
-Edits the profile of a contact.
+Saves the current state of the EduMate into a file.
 
-When to use:
-*
+<div markdown="block" class="alert alert-info">
+
+:information_source: You can use this if:
+* you want to save your progress.
+* you want to play around with the functionality without changing anything permanently.
+
+</div>
 
 Formats:
-*
+* `save FILE_NAME`: Saves the EduMate into a file called `FILE_NAME.json`.
 
 What you should see:<br>
 {GUI}<br>
 {Explanation}
 
 Examples:
+* `save backup`: Saves the EduMate into the `backup.json` file.
 
 ### Load a copy of EduMate `load`
 
-Edits the profile of a contact.
+Loads the contents of a save file into EduMate.
 
-When to use:
-*
+<div markdown="block" class="alert alert-info">
+
+:information_source: You can use this if:
+* you want to retrieve your save progress.
+
+</div>
 
 Formats:
 *
@@ -507,6 +589,7 @@ What you should see:<br>
 {Explanation}
 
 Examples:
+* `load backup`: Loads the EduMate from the file named `backup.json`.
 
 ## Meet Commands
 
@@ -514,8 +597,12 @@ Examples:
 
 Edits the profile of a contact.
 
-When to use:
+<div markdown="block" class="alert alert-info">
+
+:information_source: You can use this if:
 *
+
+</div>
 
 Formats:
 *
@@ -532,8 +619,12 @@ Examples:
 
 Edits the profile of a contact.
 
-When to use:
+<div markdown="block" class="alert alert-info">
+
+:information_source: You can use this if:
 *
+
+</div>
 
 Formats:
 *
@@ -550,8 +641,12 @@ Examples:
 
 Edits the profile of a contact.
 
-When to use:
+<div markdown="block" class="alert alert-info">
+
+:information_source: You can use this if:
 *
+
+</div>
 
 Formats:
 *
@@ -566,8 +661,12 @@ Examples:
 
 Edits the profile of a contact.
 
-When to use:
+<div markdown="block" class="alert alert-info">
+
+:information_source: You can use this if:
 *
+
+</div>
 
 Formats:
 *
