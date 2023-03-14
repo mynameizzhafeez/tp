@@ -3,13 +3,16 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.ContactIndex;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -40,6 +43,19 @@ public class ParserUtil {
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 
+    /**
+     * Returns a ContactIndex from the string index.
+     */
+    public static ContactIndex parseContactIndex(String index) throws ParseException {
+        String trimmedIndex = index.trim();
+        if (trimmedIndex.isEmpty()) {
+            return null;
+        }
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        return new ContactIndex(Integer.parseInt(trimmedIndex));
+    }
     /**
      * Parses an {@code intString} into an {@code Integer} and returns it.
      * @throws ParseException if the string cannot be converted into an integer.
@@ -179,6 +195,36 @@ public class ParserUtil {
             moduleTagSet.add(parseModuleTag(tagName));
         }
         return moduleTagSet;
+    }
+
+    /**
+     * Parses {@code Collection<String> tags} into a {@code Set<GroupTag>} if {@code tags} is non-empty.
+     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<GroupTag>} containing zero tags.
+     */
+    public static Optional<Set<GroupTag>> parseGroupTagsForCommands(Collection<String> tags) throws ParseException {
+        assert tags != null;
+
+        if (tags.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
+        return Optional.of(ParserUtil.parseGroupTags(tagSet));
+    }
+
+    /**
+     * Parses {@code Collection<String> tags} into a {@code Set<ModuleTag>} if {@code tags} is non-empty.
+     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<ModuleTag>} containing zero tags.
+     */
+    public static Optional<Set<ModuleTag>> parseModuleTagsForCommands(Collection<String> tags) throws ParseException {
+        assert tags != null;
+
+        if (tags.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
+        return Optional.of(parseModuleTags(tagSet));
     }
 }
 
