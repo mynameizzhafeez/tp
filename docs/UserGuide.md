@@ -46,9 +46,10 @@ If this is the first time you are using this user guide, we highly recommend you
       5. [**View a contact's profile `view`**](#view-a-contacts-profile-view)
       6. [**Edit a contact's details `edit`**](#edit-a-contacts-details-edit)
       7. [**Delete a contact `delete`**](#delete-a-contact-delete)
-      8. [**Add or remove a label from a contact `tag`**](#add-or-remove-a-label-from-a-contact-tag)
+      8. [**Add a label to a contact `tag`**](#tagging-a-module-to-an-existing-contact--tag)
+      9. [**Remove a label from a contact `tag`**](#untagging-a-module-from-an-existing-contact--untag)
    4. [**Search Commands**](#search-commands)
-      1. [**Find contacts that match your criteria `find`**](#find-contacts-that-match-your-criteria-find)
+      1. [**Find contacts that match your criteria `find`**](#locating-persons-by-keywords--find)
       2. [**Sort contacts based on your criteria `sort`**](#sort-contacts-based-on-your-criteria-sort)
    5. [**Storage Commands**](#storage-commands)
       1. [**Save a copy of EduMate `save`**](#save-a-copy-of-edumate-save)
@@ -468,29 +469,91 @@ What you should see:<br>
 Examples:
 * `delete 4`: removes the fourth contact from the EduMate.
 
-### Add or remove a label from a contact `tag`
+### Tagging a module to an existing contact : `tag`
 
-Edits the profile of a contact.
+Adds module tag(s) to an existing contact.
 
-<div markdown="block" class="alert alert-info">
+Formats: 
+* `tag CONTACT_INDEX m/MODULE_TAG`
+* `tag m/MODULE_TAG`
 
-:information_source: You can use this if:
-*
+Example of usage: `tag 3 m/CS2103T`
+```
+Name: John Doe (User)
+Modules: [CS2101 , MA2104 , MA3252 , CFG1002]
+```
 
-</div>
+Expected outcome for CLI:
+```
+Module(s) tagged to Person!
+Name: John Smith
+Modules: [CS2100, CS2101, CS2102, CS2103T]
+Module(s) in common: [CS2101, CS2103T]
+```
+Description of outcome: 
 
-Formats:
-*
+CS2103T is added to John Doe's list of modules. Assuming the user also takes CS2101 and CS2103T, which are represented as the modules in common.
 
-What you should see:<br>
-{GUI}<br>
-{Explanation}
+Example of usage: tag m/CS2103T
+```
+Name: John Doe (user)
+Modules: [CS2101, MA2104, MA3252, CFG1002]
+```
 
-Examples:
+Expected outcome for CLI:
+```
+Module(s) tagged to Person!
+Name: John Doe
+Modules: [CS2101, CS2103T, MA2104, MA3252, CFG1002]
+```
+Description of outcome:
+
+CS2103T is added to John Doe's, the user, list of modules.
+
+### Untagging a module from an existing contact : `untag`
+
+Removes a module tag from an existing contact.
+
+Formats: 
+* `untag CONTACT_INDEX m/MODULE_TAG`
+* `untag m/MODULE_TAG`
+
+Example of usage: `untag 3 m/CS2103T`
+```
+Name: John Doe (User)
+Modules: [CS2101, MA2104, MA3252, CFG1002]
+```
+
+Expected outcome for CLI:
+```
+"Module(s) untagged to Person!
+Name: John Smith
+Modules: [CS2100, CS2101, CS2102]
+Module(s) in common: [CS2101]
+```
+Description of outcome: 
+
+CS2103T is removed from John Doe's list of modules. Assuming the user also takes CS2101, which is represented as the modules in common.
+
+Example of usage: untag m/CS2103T
+```
+Name: John Doe (user)
+Modules: [CS2101, CS2103T, MA2104, MA3252, CFG1002]
+```
+
+Expected outcome for CLI:
+```
+"Module(s) untagged to Person!
+Name: John Doe
+Modules: [CS2101, MA2104, MA3252, CFG1002]
+```
+Description of outcome:
+
+CS2103T is added to John Doe's, the user, list of modules.
 
 ## Search Commands
 
-### Find contacts that match your criteria `find`
+### Locating persons by keywords : `find`
 
 Finds persons whose specified fields contain any of the given keywords.
 
