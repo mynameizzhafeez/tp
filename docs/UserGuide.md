@@ -827,8 +827,8 @@ These prefixes are for labelling arguments when you run our commands.
 | [view](#view-a-contacts-profile-view)                             | `view INDEX`, `view n/NAME`                          | `view 5`, `view n/Wen Qing`                                            |
 | [edit](#edit-a-contacts-details-edit)                             | `edit INDEX z/FIELD`, `edit z/FIELD`                 | `edit 3 n/Wen Qing`, `edit p/87746543`                                 |
 | [delete](#delete-a-contact-delete)                                | `delete INDEX`                                       | `delete 6`                                                             |
-| [tag/untag](#add-or-remove-a-label-from-a-contact-tag)            | `tag`                                                | `tag 4 g/Friend`, `tag m/CS1231S`                                      |                                     |
-| [find](#find-contacts-that-match-your-criteria-find)              | `find z/KEYWORD`                                     | `find n/Tan`                                                           |
+| [tag/untag](#tagging-a-module-to-an-existing-contact--tag)        | `tag`                                                | `tag 4 g/Friend`, `tag m/CS1231S`                                      |                                     |
+| [find](#locating-persons-by-keywords--find)                       | `find z/KEYWORD`                                     | `find n/Tan`                                                           |
 | [sort](#sort-contacts-based-on-your-criteria-sort)                | `sort [z/]…​`, `sort [z/a]…​`, `sort [z/d]…​`        | `sort n/d`, `sort g/ p/d`                                              |
 | [save](#save-a-copy-of-edumate-save)                              | `save FILE_NAME`                                     | `save backup`                                                          |
 | [load](#load-a-copy-of-edumate-load)                              | `load FILE_NAME`                                     | `load backup`                                                          |
