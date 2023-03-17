@@ -48,17 +48,16 @@ If this is the first time you are using this user guide, we highly recommend you
       7. [**Delete a contact `delete`**](#delete-a-contact-delete)
       8. [**Add a label to a contact `tag`**](#tagging-a-module-to-an-existing-contact--tag)
       9. [**Remove a label from a contact `tag`**](#untagging-a-module-from-an-existing-contact--untag)
-   4. [**Search Commands**](#search-commands)
+   4. [**Advanced Commands**](#advanced-commands)
       1. [**Find contacts that match your criteria `find`**](#locating-persons-by-keywords--find)
       2. [**Sort contacts based on your criteria `sort`**](#sort-contacts-based-on-your-criteria-sort)
-   5. [**Storage Commands**](#storage-commands)
-      1. [**Save a copy of EduMate `save`**](#save-a-copy-of-edumate-save)
-      2. [**Load a copy of EduMate `load`**](#load-a-copy-of-edumate-load)
-   6. [**Meet Commands**](#meet-commands)
-      1. [**Suggest places to meet with your contacts `meet`**](#suggest-places-to-meet-with-your-contacts-meet)
-   7. [**Advanced Commands**](#advanced-commands)
-      1. [**View your past command history `history`**](#view-your-past-command-history-history)
-   8. [**Miscellaneous Commands**](#miscellaneous-commands)
+      3. [**Suggest places to eat with your contacts `eat`**](#suggest-places-to-eat-with-your-contacts-eat)
+      4. [**Suggest places to study with your contacts `study`**](#suggest-places-to-study-with-your-contacts-study)
+      5. [**Suggest places to meet with your contacts `meet`**](#suggest-places-to-meet-with-your-contacts-meet)
+      6. [**Save a copy of EduMate `save`**](#save-a-copy-of-edumate-save)
+      7. [**Load a copy of EduMate `load`**](#load-a-copy-of-edumate-load)
+      8. [**View your past command history `history`**](#view-your-past-command-history-history)
+   5. [**Miscellaneous Commands**](#miscellaneous-commands)
       1. [**Clear the contents of EduMate `clear`**](#clear-the-contents-of-edumate-clear)
       2. [**Generate a random EduMate `sample`**](#generate-a-random-edumate-sample)
 7. [**FAQ**](#faq)
@@ -179,8 +178,8 @@ Do also ensure that you have Java `11` or above installed in your Computer. If y
 | `view`    | [View a contact's profile](#view-a-contacts-profile-view)                                    |
 | `edit`    | [Edit a contact's details](#edit-a-contacts-details-edit)                                    |
 | `delete`  | [Delete a contact](#delete-a-contact-delete)                                                 |
-| `tag`     | [Add or remove a label from a contact](#add-or-remove-a-label-from-a-contact-tag)            |
-| `find`    | [Find contacts that match your criteria](#find-contacts-that-match-your-criteria-find)       |
+| `tag`     | [Add or remove a label from a contact](#tagging-a-module-to-an-existing-contact--tag)        |
+| `find`    | [Find contacts that match your criteria](#locating-persons-by-keywords--find)                |
 | `sort`    | [Sort contacts based on your criteria](#sort-contacts-based-on-your-criteria-sort)           |
 | `save`    | [Save a copy of EduMate](#save-a-copy-of-edumate-save)                                       |
 | `load`    | [Load a copy of EduMate](#load-a-copy-of-edumate-load)                                       |
@@ -551,7 +550,7 @@ Description of outcome:
 
 CS2103T is added to John Doe's, the user, list of modules.
 
-## Search Commands
+## Advanced Commands
 
 ### Locating persons by keywords : `find`
 
@@ -626,8 +625,6 @@ Examples:
 * `sort a/a`: Sorts contacts by address in **ascending order**.
 * `sort g/d n/d`: Sorts contacts by **descending** number of groups, using the names as tie breaks.
 
-## Storage Commands
-
 ### Save a copy of EduMate `save`
 
 Saves the current state of the EduMate into a file.
@@ -671,7 +668,45 @@ What you should see:<br>
 Examples:
 * `load backup`: Loads the EduMate from the file named `backup.json`.
 
-## Meet Commands
+### Suggest places to eat with your contacts `eat`
+
+Edits the profile of a contact.
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: You can use this if:
+*
+
+</div>
+
+Formats:
+*
+
+What you should see:<br>
+{GUI}<br>
+{Explanation}
+
+Examples:
+
+### Suggest places to study with your contacts `study`
+
+Edits the profile of a contact.
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: You can use this if:
+*
+
+</div>
+
+Formats:
+*
+
+What you should see:<br>
+{GUI}<br>
+{Explanation}
+
+Examples:
 
 ### Suggest places to meet with your contacts `meet`
 
@@ -692,8 +727,6 @@ What you should see:<br>
 {Explanation}
 
 Examples:
-
-## Advanced Commands
 
 ### View your past command history `history`
 
