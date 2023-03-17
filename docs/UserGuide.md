@@ -403,20 +403,23 @@ Formats:
 
 What you should see:<br>
 
-|                               `view`                               |
-|:------------------------------------------------------------------:|
-| <img src='images/userprofile.png' style="width:50%; margin:0 25%"> |
-|             User's own profile displayed on the panel              |
+<img src="images/userprofile.png" style="width:50%; margin: 0 25%">
+<div style="width:50%; margin: 0 25%; text-align:center">
+    <code>view</code>: User's own profile displayed on the panel
+</div>
+<br>
 
-|                                     `view 5`                                     |
-|:--------------------------------------------------------------------------------:|
-|    <img src='images/fifthPersonProfile.png' style="width:50%; margin:0 25%">     |
-| The profile of the 5th person indexed by EduMate will be displayed on the panel. |
+<img src="images/fifthPersonProfile.png" style="width:50%; margin: 0 25%">
+<div style="width:50%; margin: 0 25%; text-align:center">
+    <code>view 5</code>: The profile of the 5th person indexed by EduMate will be displayed on the panel
+</div>
+<br>
 
-|                       `view n/Charles Windsor`                        |
-|:---------------------------------------------------------------------:|
-| <img src='images/charlesWindsor.png' style="width:50%; margin:0 25%"> |
-|    The profile of Charles Windsor will be displayed on the panel.     |
+<img src="images/charlesWindsor.png" style="width:50%; margin: 0 25%">
+<div style="width:50%; margin: 0 25%; text-align:center">
+    <code>view n/Charles Windsor</code>: The profile of Charles Windsor will be displayed on the panel
+</div>
+<br>
 
 Examples:
 
