@@ -46,10 +46,10 @@ If this is the first time you are using this user guide, we highly recommend you
       5. [**View a contact's profile `view`**](#view-a-contacts-profile-view)
       6. [**Edit a contact's details `edit`**](#edit-a-contacts-details-edit)
       7. [**Delete a contact `delete`**](#delete-a-contact-delete)
-      8. [**Add a label to a contact `tag`**](#tagging-a-module-to-an-existing-contact--tag)
-      9. [**Remove a label from a contact `tag`**](#untagging-a-module-from-an-existing-contact--untag)
+      8. [**Add a label to a contact `tag`**](#tag-a-module-to-an-existing-contact--tag)
+      9. [**Remove a label from a contact `tag`**](#untag-a-module-from-an-existing-contact--untag)
    4. [**Advanced Commands**](#advanced-commands)
-      1. [**Find contacts that match your criteria `find`**](#locating-persons-by-keywords--find)
+      1. [**Find contacts that match your criteria `find`**](#locate-persons-by-keywords--find)
       2. [**Sort contacts based on your criteria `sort`**](#sort-contacts-based-on-your-criteria-sort)
       3. [**Suggest places to eat with your contacts `eat`**](#suggest-places-to-eat-with-your-contacts-eat)
       4. [**Suggest places to study with your contacts `study`**](#suggest-places-to-study-with-your-contacts-study)
@@ -471,7 +471,7 @@ What you should see:<br>
 Examples:
 * `delete 4`: removes the fourth contact from the EduMate.
 
-### Tagging a module to an existing contact : `tag`
+### Tag a module to an existing contact : `tag`
 
 Adds module tag(s) to an existing contact.
 
@@ -512,7 +512,7 @@ Description of outcome:
 
 CS2103T is added to John Doe's, the user, list of modules.
 
-### Untagging a module from an existing contact : `untag`
+### Untag a module from an existing contact : `untag`
 
 Removes a module tag from an existing contact.
 
@@ -555,7 +555,7 @@ CS2103T is added to John Doe's, the user, list of modules.
 
 ## Advanced Commands
 
-### Locating persons by keywords : `find`
+### Locate persons by keywords : `find`
 
 Finds persons whose specified fields contain any of the given keywords.
 
