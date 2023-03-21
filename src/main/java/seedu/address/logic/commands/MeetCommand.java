@@ -9,6 +9,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.results.CommandResult;
 import seedu.address.logic.parser.IndexHandler;
 import seedu.address.model.Model;
 import seedu.address.model.location.DistanceUtil;

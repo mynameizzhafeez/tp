@@ -6,6 +6,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.results.ViewCommandResult;
 import seedu.address.logic.parser.IndexHandler;
 import seedu.address.model.Model;
 import seedu.address.model.person.ContactIndex;
@@ -44,7 +45,7 @@ public class UntagCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public ViewCommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
         if (index == null) {
@@ -59,7 +60,7 @@ public class UntagCommand extends Command {
      * @return feedback message of the operation result for display.
      * @throws CommandException if an error occurs during command execution.
      */
-    public CommandResult removePersonTags(Model model) throws CommandException {
+    public ViewCommandResult removePersonTags(Model model) throws CommandException {
         IndexHandler indexHandler = new IndexHandler(model);
 
         Person personToEdit = indexHandler.getPersonByIndex(index).orElseThrow(() ->
@@ -74,19 +75,20 @@ public class UntagCommand extends Command {
         personToEdit.setCommonModules(userModuleTags);
 
         model.updateObservablePersonList();
-        return new CommandResult(String.format(MESSAGE_UNTAG_PERSON_SUCCESS
+        String message = String.format(MESSAGE_UNTAG_PERSON_SUCCESS
                 + "Name: " + personToEdit.getName().toString() + '\n'
                 + "Modules: " + personToEdit.getImmutableModuleTags().toString() + '\n'
-                + "Module(s) in common: " + personToEdit.getImmutableCommonModuleTags().toString()));
+                + "Module(s) in common: " + personToEdit.getImmutableCommonModuleTags().toString());
+
+        return new ViewCommandResult(message, personToEdit);
     }
 
     /**
      * Removes tags from the user.
      * @param model {@code Model} which the command should operate on
      * @return feedback message of the operation result for display.
-     * @throws CommandException if an error occurs during command execution.
      */
-    public CommandResult removeUserTags(Model model) throws CommandException {
+    public ViewCommandResult removeUserTags(Model model) {
         User editedUser = model.getUser();
 
         ModuleTagSet userModuleTags = editedUser.getModuleTags();
@@ -96,9 +98,11 @@ public class UntagCommand extends Command {
         model.getObservablePersonList().forEach(person ->
                 person.setCommonModules(editedUser.getImmutableModuleTags()));
 
-        return new CommandResult(String.format(MESSAGE_UNTAG_USER_SUCCESS
+        String message = String.format(MESSAGE_UNTAG_USER_SUCCESS
                 + "Name: " + editedUser.getName().toString() + '\n'
-                + "Modules: " + editedUser.getImmutableModuleTags().toString()));
+                + "Modules: " + editedUser.getImmutableModuleTags().toString());
+
+        return new ViewCommandResult(message, editedUser);
     }
 
     public ContactIndex getIndex() {

@@ -10,6 +10,7 @@ import java.util.Set;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.results.ViewCommandResult;
 import seedu.address.logic.parser.IndexHandler;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Model;
@@ -64,7 +65,7 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public ViewCommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
         if (contactIndex == null) {
@@ -80,7 +81,7 @@ public class EditCommand extends Command {
      * @return feedback message of the operation result for display
      * @throws CommandException If an error occurs during command execution.
      */
-    protected CommandResult editPerson(Model model) throws CommandException {
+    protected ViewCommandResult editPerson(Model model) throws CommandException {
         IndexHandler indexHandler = new IndexHandler(model);
         Optional<Person> personToEditOption = indexHandler.getPersonByIndex(contactIndex);
 
@@ -103,16 +104,16 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateObservablePersonList();
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        return new ViewCommandResult(
+                String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson), editedPerson);
     }
 
     /**
      * Edits the user information
      * @param model {@code Model} which the command should operate on
      * @return feedback message of the operation result for display
-     * @throws CommandException If an error occurs during command execution.
      */
-    private CommandResult editUser(Model model) {
+    private ViewCommandResult editUser(Model model) {
         User editedUser = createEditedUser(model.getUser(), editPersonDescriptor);
 
         Set<ModuleTag> userModuleTags = model.getUser().getImmutableModuleTags();
@@ -122,7 +123,8 @@ public class EditCommand extends Command {
         model.getObservablePersonList().forEach(person -> person.setCommonModules(userModuleTags));
 
         model.setUser(editedUser);
-        return new CommandResult(String.format(MESSAGE_EDIT_USER_SUCCESS, editedUser));
+        return new ViewCommandResult(
+                String.format(MESSAGE_EDIT_USER_SUCCESS, editedUser), editedUser);
     }
 
     /**

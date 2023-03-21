@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.results.ViewCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.person.ContactIndex;
 import seedu.address.model.person.Person;
@@ -39,20 +40,17 @@ public class ViewCommand extends Command {
      * @throws CommandException If an error occurs during command execution.
      */
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public ViewCommandResult execute(Model model) throws CommandException {
         Optional<Person> person = retrievePerson(model);
         if (person.isEmpty()) {
-            return new CommandResult("No such person found!", false, false,
-                    model.getUser(), true);
+            return new ViewCommandResult("No such person found!", model.getUser());
         }
         Person contact = person.get();
-        return new CommandResult(contact.toString(), false, false, contact, true);
+        return new ViewCommandResult(contact.toString(), contact);
     }
 
     /**
      * Retrieves either a Person by its index or name or the User itself.
-     * @param model
-     * @return
      */
     public Optional<Person> retrievePerson(Model model) {
         List<Person> personList = model.getObservablePersonList();
