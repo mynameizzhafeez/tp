@@ -11,7 +11,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.location.LocationUtil;
+import seedu.address.model.location.data.LocationDataUtil;
 import seedu.address.model.person.ContactIndex;
 
 class MeetCommandTest {
@@ -33,11 +33,11 @@ class MeetCommandTest {
     private static final Set<ContactIndex> INDICES =
             Set.of(new ContactIndex(6), new ContactIndex(8));
     private static final MeetCommand MEET_COMMAND =
-            new MeetCommand(INDICES, LocationUtil.MEET_LOCATIONS, 3);
+            new MeetCommand(INDICES, LocationDataUtil.MEET_LOCATIONS, 3);
     private static final MeetCommand STUDY_COMMAND =
-            new MeetCommand(INDICES, LocationUtil.STUDY_LOCATIONS, 2);
+            new MeetCommand(INDICES, LocationDataUtil.STUDY_LOCATIONS, 2);
     private static final MeetCommand EAT_COMMAND =
-            new MeetCommand(INDICES, LocationUtil.EAT_LOCATIONS, 3);
+            new MeetCommand(INDICES, LocationDataUtil.EAT_LOCATIONS, 3);
 
     private final Model model = new ModelManager(getTypicalEduMate(), new UserPrefs());
     private final Model expectedModel = new ModelManager(getTypicalEduMate(), new UserPrefs());

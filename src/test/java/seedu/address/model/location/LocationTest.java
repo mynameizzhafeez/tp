@@ -126,21 +126,21 @@ public class LocationTest {
 
     @Test
     public void getLat() {
-        assertEquals(VALID_LOCATION_1.getLat(),
+        assertEquals(VALID_LOCATION_1.getLatitude(),
                 VALID_LAT_1);
-        assertEquals(VALID_LOCATION_2.getLat(),
+        assertEquals(VALID_LOCATION_2.getLatitude(),
                 VALID_LAT_2);
-        assertEquals(VALID_LOCATION_3.getLat(),
+        assertEquals(VALID_LOCATION_3.getLatitude(),
                 VALID_LAT_3);
     }
 
     @Test
     public void getLon() {
-        assertEquals(VALID_LOCATION_1.getLon(),
+        assertEquals(VALID_LOCATION_1.getLongitude(),
                 VALID_LON_1);
-        assertEquals(VALID_LOCATION_2.getLon(),
+        assertEquals(VALID_LOCATION_2.getLongitude(),
                 VALID_LON_2);
-        assertEquals(VALID_LOCATION_3.getLon(),
+        assertEquals(VALID_LOCATION_3.getLongitude(),
                 VALID_LON_3);
     }
 

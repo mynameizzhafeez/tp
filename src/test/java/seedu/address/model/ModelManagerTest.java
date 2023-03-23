@@ -149,7 +149,7 @@ public class ModelManagerTest {
 
         createEqualsFilteredList(
                 Prefix.MODULE_TAG,
-                ALBERT.getImmutableModuleTags().toString().replaceAll("[\\[\\], ]", "").split(" "),
+                ALBERT.getImmutableModuleCodes().toString().replaceAll("[\\[\\], ]", "").split(" "),
                 eduMate, userPrefs);
 
         createEqualsFilteredList(

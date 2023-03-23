@@ -56,7 +56,7 @@ public class ContainsKeywordsPredicate implements Predicate<Person> {
             return person.getTelegramHandle().getValue();
 
         case MODULE_TAG:
-            return person.getImmutableModuleTags().toString();
+            return person.getImmutableModuleCodes().toString();
 
         case GROUP_TAG:
             return person.getImmutableGroupTags().toString();

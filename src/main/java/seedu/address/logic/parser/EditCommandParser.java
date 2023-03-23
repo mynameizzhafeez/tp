@@ -49,10 +49,11 @@ public class EditCommandParser implements Parser<EditCommand> {
                     .parseTelegramHandle(argMultimap.getValue(Prefix.TELEGRAM_HANDLE).get()));
         }
 
-        ParserUtil.parseGroupTagsForCommands(argMultimap.getAllValues(Prefix.GROUP_TAG))
-                .ifPresent(editPersonDescriptor::setGroupTags);
-        ParserUtil.parseModuleTagsForCommands(argMultimap.getAllValues(Prefix.MODULE_TAG))
-                .ifPresent(editPersonDescriptor::setModuleTags);
+        editPersonDescriptor.setGroupTags(
+                ParserUtil.parseGroupTags(argMultimap.getAllValues(Prefix.GROUP_TAG)));
+        editPersonDescriptor.setModuleTags(
+                ParserUtil.parseModuleTags(argMultimap.getAllValues(Prefix.MODULE_TAG)));
+
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }

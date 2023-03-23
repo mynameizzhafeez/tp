@@ -24,8 +24,8 @@ public class PersonTest {
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Person person = new PersonBuilder().build();
         assertThrows(UnsupportedOperationException.class, () -> person.getImmutableGroupTags().remove(0));
-        assertThrows(UnsupportedOperationException.class, () -> person.getImmutableModuleTags().remove(0));
-        assertThrows(UnsupportedOperationException.class, () -> person.getImmutableCommonModuleTags().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> person.getImmutableModuleCodes().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> person.getImmutableCommonModuleCodes().remove(0));
     }
 
     @Test
@@ -99,7 +99,7 @@ public class PersonTest {
         Person albert = ALBERT;
         assertEquals(albert.hashCode(), Objects.hash(ALBERT.getName(),
                 ALBERT.getPhone(), ALBERT.getEmail(), ALBERT.getAddress(),
-                ALBERT.getTelegramHandle(), ALBERT.getGroupTags(),
-                ALBERT.getModuleTags()));
+                ALBERT.getTelegramHandle(), ALBERT.getGroupTagSet(),
+                ALBERT.getModuleTagSet()));
     }
 }

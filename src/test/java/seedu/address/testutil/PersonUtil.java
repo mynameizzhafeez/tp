@@ -35,7 +35,7 @@ public class PersonUtil {
         person.getImmutableGroupTags().stream().forEach(
             s -> sb.append(Prefix.GROUP_TAG + s.tagName + " ")
         );
-        person.getImmutableModuleTags().stream().forEach(
+        person.getImmutableModuleCodes().stream().forEach(
                 s -> sb.append(Prefix.MODULE_TAG + s.tagName + " ")
         );
         return sb.toString();
@@ -84,6 +84,6 @@ public class PersonUtil {
                 && firstUser.getEmail().equals(secondUser.getEmail())
                 && firstUser.getPhone().equals(secondUser.getPhone())
                 && firstUser.getTelegramHandle().equals(secondUser.getTelegramHandle())
-                && firstUser.getImmutableModuleTags().equals(secondUser.getImmutableModuleTags());
+                && firstUser.getImmutableModuleCodes().equals(secondUser.getImmutableModuleCodes());
     }
 }

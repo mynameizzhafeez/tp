@@ -6,14 +6,19 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.Optional;
+import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
+import org.joda.time.LocalTime;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.commitment.Lesson;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.ContactIndex;
 import seedu.address.model.person.Email;
@@ -22,6 +27,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.tag.GroupTag;
 import seedu.address.model.tag.ModuleTag;
+import seedu.address.model.time.Day;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -29,6 +35,8 @@ import seedu.address.model.tag.ModuleTag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    private static final Pattern MODULE_TAG_ARGUMENTS_VALIDATION_REGEX = Pattern.compile(
+            "(?<moduleCode>\\S+)\\s+(?<day>\\S+)\\s+(?<startTime>\\S+)\\s+(?<endTime>\\S+).*");
 
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Index>}.
@@ -159,34 +167,50 @@ public class ParserUtil {
     }
 
     /**
-     * To parse additional arguments for TagCommand.
-     * @param tags String to be parsed.
-     * @return ArrayList for arguments.
-     * @throws ParseException
-     */
-    public static ArrayList<String> parseMoreModules(String tags) throws ParseException {
-        String trimmedArgs = tags.trim();
-        if (trimmedArgs.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
-        }
-        // I can just set them as null and exceptions will be throw in TagCommand.
-        return new ArrayList<String>(Arrays.asList(trimmedArgs.split("\\s+")));
-    }
-
-    /**
-     * Parses a {@code String tag} into a {@code GroupTag}.
+     * Parses a {@code String tag} into a {@code ModuleTag}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code tag} is invalid.
      */
     public static ModuleTag parseModuleTag(String tag) throws ParseException {
         requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        ArrayList<String> args = parseMoreModules(trimmedTag);
-        if (!ModuleTag.isValidTagName(args.get(0))) {
-            throw new ParseException(ModuleTag.MESSAGE_CONSTRAINTS);
+
+        final Matcher matcher = MODULE_TAG_ARGUMENTS_VALIDATION_REGEX.matcher(tag.trim());
+
+        if (!matcher.matches()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
-        return new ModuleTag(args);
+
+        final String moduleCode = matcher.group("moduleCode");
+        final String dayAsStr = matcher.group("day");
+        final String startTime = matcher.group("startTime");
+        final String endTime = matcher.group("endTime");
+
+        Lesson lesson = new Lesson(parseLocalTime(startTime), parseLocalTime(endTime), parseDay(dayAsStr));
+
+        return new ModuleTag(moduleCode, lesson);
+    }
+
+    public static Day parseDay(String dayAsStr) throws ParseException {
+        String upperDayAsStr = dayAsStr.toUpperCase();
+        for (Day day : Day.values()) {
+            if (day.toString().contains(upperDayAsStr)) {
+                return day;
+            }
+        }
+        throw new ParseException("Day is invalid");
+    }
+
+    public static LocalTime parseLocalTime(String timeAsStr) throws ParseException {
+        try {
+            int hour = Integer.parseInt(timeAsStr);
+            if (hour >= 24 || hour < 0) {
+                throw new ParseException("Invalid time");
+            }
+            return new LocalTime(hour, 0);
+        } catch (NumberFormatException nfe) {
+            throw new ParseException("Invalid time");
+        }
     }
 
     /**
@@ -194,8 +218,10 @@ public class ParserUtil {
      */
     public static Set<GroupTag> parseGroupTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
+        List<String> filteredTags = tags.stream()
+                .filter(t -> !t.isBlank()).collect(Collectors.toList());
         final Set<GroupTag> groupTagSet = new HashSet<>();
-        for (String tagName : tags) {
+        for (String tagName : filteredTags) {
             groupTagSet.add(parseGroupTag(tagName));
         }
         return groupTagSet;
@@ -206,41 +232,13 @@ public class ParserUtil {
      */
     public static Set<ModuleTag> parseModuleTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
+        List<String> filteredTags = tags.stream()
+                .filter(t -> !t.isBlank()).collect(Collectors.toList());
         final Set<ModuleTag> moduleTagSet = new HashSet<>();
-        for (String tagName : tags) {
+        for (String tagName : filteredTags) {
             moduleTagSet.add(parseModuleTag(tagName));
         }
         return moduleTagSet;
-    }
-
-    /**
-     * Parses {@code Collection<String> tags} into a {@code Set<GroupTag>} if {@code tags} is non-empty.
-     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<GroupTag>} containing zero tags.
-     */
-    public static Optional<Set<GroupTag>> parseGroupTagsForCommands(Collection<String> tags) throws ParseException {
-        assert tags != null;
-
-        if (tags.isEmpty()) {
-            return Optional.empty();
-        }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseGroupTags(tagSet));
-    }
-
-    /**
-     * Parses {@code Collection<String> tags} into a {@code Set<ModuleTag>} if {@code tags} is non-empty.
-     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<ModuleTag>} containing zero tags.
-     */
-    public static Optional<Set<ModuleTag>> parseModuleTagsForCommands(Collection<String> tags) throws ParseException {
-        assert tags != null;
-
-        if (tags.isEmpty()) {
-            return Optional.empty();
-        }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(parseModuleTags(tagSet));
     }
 }
 

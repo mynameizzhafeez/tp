@@ -2,10 +2,11 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
+import seedu.address.model.commitment.Commitment;
+import seedu.address.model.recommender.Schedule;
 import seedu.address.model.tag.GroupTag;
 import seedu.address.model.tag.ModuleTag;
 
@@ -26,8 +27,9 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final GroupTagSet groupTags = new GroupTagSet();
-    private final ModuleTagSet moduleTags = new ModuleTagSet();
+    private final GroupTagSet groupTagSet = new GroupTagSet();
+    private final ModuleTagSet moduleTagSet = new ModuleTagSet();
+    private final Schedule schedule = new Schedule();
 
     /**
      * Every field must be present and not null.
@@ -41,8 +43,8 @@ public class Person {
         this.address = address;
         this.telegramHandle = telegramHandle;
         this.contactIndex = contactIndex;
-        this.groupTags.addAll(groupTags);
-        this.moduleTags.addAll(moduleTags);
+        this.groupTagSet.addAll(groupTags);
+        this.moduleTagSet.addAll(moduleTags);
     }
 
     public Name getName() {
@@ -72,8 +74,8 @@ public class Person {
     /**
      * Returns a copy of the person's group tags.
      */
-    public GroupTagSet getGroupTags() {
-        return groupTags;
+    public GroupTagSet getGroupTagSet() {
+        return groupTagSet;
     }
 
     /**
@@ -81,37 +83,73 @@ public class Person {
      * if modification is attempted.
      */
     public Set<GroupTag> getImmutableGroupTags() {
-        return groupTags.getImmutableGroups();
+        return groupTagSet.getImmutableGroups();
     }
 
     /**
      * Returns a copy of the person's module tags.
      */
-    public ModuleTagSet getModuleTags() {
-        return moduleTags;
+    public ModuleTagSet getModuleTagSet() {
+        return moduleTagSet;
     }
 
     /**
-     * Returns an immutable module tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable modules, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<String> getImmutableModuleCodes() {
+        return moduleTagSet.getImmutableModuleCodes();
+    }
+
+    /**
+     * Returns an immutable module tags, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<ModuleTag> getImmutableModuleTags() {
-        return moduleTags.getImmutableModules();
+        return Collections.unmodifiableSet(moduleTagSet.getImmutableModuleTags());
     }
 
     /**
-     * Returns an immutable module tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable common modules, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<String> getImmutableCommonModuleCodes() {
+        return Collections.unmodifiableSet(moduleTagSet.getImmutableCommonModuleCodes());
+    }
+
+    /**
+     * Returns an immutable common modules, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<ModuleTag> getImmutableCommonModuleTags() {
-        return Collections.unmodifiableSet(moduleTags.getImmutableCommonModules());
+        return Collections.unmodifiableSet(moduleTagSet.getImmutableCommonModuleTags());
     }
 
     /**
      * Sets the common modules that the person has with the user.
      */
     public void setCommonModules(Set<ModuleTag> userModules) {
-        moduleTags.setCommonModules(userModules);
+        moduleTagSet.setCommonModules(userModules);
+    }
+
+    /**
+     * Returns the schedule of the person.
+     */
+    public Schedule getSchedule() {
+        return schedule;
+    }
+
+    public void addCommitment(Commitment commitment) {
+        requireAllNonNull(commitment);
+        schedule.addCommitment(commitment);
+    }
+
+    public void addModuleTags(ModuleTag... moduleTags) {
+        moduleTagSet.addAll(Set.of(moduleTags));
+    }
+
+    public void removeModuleTags(ModuleTag... moduleTags) {
+        moduleTagSet.removeAll(Set.of(moduleTags));
     }
 
     /**
@@ -119,7 +157,8 @@ public class Person {
      */
     public Person setContactIndex(ContactIndex contactIndex) {
         return new Person(name, phone, email, address, telegramHandle,
-                contactIndex, groupTags.getImmutableGroups(), moduleTags.getImmutableModules());
+                contactIndex, groupTagSet.getImmutableGroups(),
+                new HashSet<>(moduleTagSet.getImmutableModuleTags()));
     }
 
     /**
@@ -156,13 +195,13 @@ public class Person {
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getImmutableGroupTags().equals(getImmutableGroupTags())
                 && otherPerson.getTelegramHandle().equals(getTelegramHandle())
-                && otherPerson.getImmutableModuleTags().equals(getImmutableModuleTags());
+                && otherPerson.getImmutableModuleCodes().equals(getImmutableModuleCodes());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, telegramHandle, groupTags, moduleTags);
+        return Objects.hash(name, phone, email, address, telegramHandle, groupTagSet, moduleTagSet);
     }
 
     @Override
@@ -181,7 +220,7 @@ public class Person {
                 .append("\nGroups: ")
                 .append(getImmutableGroupTags())
                 .append("\nModules: ")
-                .append(getImmutableModuleTags())
+                .append(getImmutableModuleCodes())
                 .append("\nLessons: ")
                 .append(getLessonsAsStr());
 
@@ -189,7 +228,9 @@ public class Person {
     }
 
     public String getLessonsAsStr() {
-        return this.moduleTags.lessonsAsStr();
+        return moduleTagSet.getImmutableModuleTags()
+                .stream().map(ModuleTag::getLessonsAsStr)
+                .collect(Collectors.joining("\n"));
     }
 
 }

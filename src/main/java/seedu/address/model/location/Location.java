@@ -9,7 +9,7 @@ import java.util.Objects;
  * Location object which contains a Latitude(lat), a Longitude(lon) and a name.
  * Calculations are handled by {@code DistanceUtil} and parsing is handled by {@code LocationUtil}.
  */
-public class Location implements Comparable<Location> {
+public class Location implements Comparable<Location>, Locatable {
 
     public static final String MESSAGE_CONSTRAINTS = "Locations should be between [1.23776, 1.46066] and "
             + "[103.61751, 104.04360] for latitude and longitude respectively.";
@@ -56,6 +56,14 @@ public class Location implements Comparable<Location> {
         this.name = name;
         this.lat = lat;
         this.lon = lon;
+    }
+
+    /**
+     * Constructs a {@code Location} from a {@code Locatable} object.
+     * @param locatable a valid {@code Locatable} object.
+     */
+    public Location(Locatable locatable) {
+        this(locatable.getLatitude(), locatable.getLongitude());
     }
 
     /**
@@ -108,17 +116,13 @@ public class Location implements Comparable<Location> {
         return name;
     }
 
-    /**
-     * Gets the latitude of the location.
-     */
-    public double getLat() {
+    @Override
+    public double getLatitude() {
         return lat;
     }
 
-    /**
-     * Gets the longitude of the location.
-     */
-    public double getLon() {
+    @Override
+    public double getLongitude() {
         return lon;
     }
 

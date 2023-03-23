@@ -30,9 +30,9 @@ public class SortCommandTest {
     private static final Comparator<Person> EMAIL_COMPARATOR =
             Comparator.comparing(Person::getEmail);
     private static final Comparator<Person> GROUP_TAGS_COMPARATOR =
-            Comparator.comparing(Person::getGroupTags);
+            Comparator.comparing(Person::getGroupTagSet);
     private static final Comparator<Person> MODULE_TAGS_COMPARATOR =
-            Comparator.comparing(Person::getModuleTags);
+            Comparator.comparing(Person::getModuleTagSet);
     private static final SortCommand SORT_COMMAND =
             new SortCommand(NAME_COMPARATOR, "Name: Ascending");
     private final Model model = new ModelManager(getTypicalEduMate(), new UserPrefs());

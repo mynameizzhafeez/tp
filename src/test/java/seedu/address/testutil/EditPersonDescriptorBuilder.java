@@ -42,7 +42,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setContactIndex(person.getContactIndex());
         descriptor.setGroupTags(person.getImmutableGroupTags());
         descriptor.setTelegramHandle(person.getTelegramHandle());
-        descriptor.setModuleTags(person.getImmutableModuleTags());
+        descriptor.setModuleTags(person.getImmutableModuleCodes());
     }
 
     /**

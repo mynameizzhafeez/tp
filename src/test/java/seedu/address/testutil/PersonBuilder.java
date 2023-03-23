@@ -58,7 +58,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         groupTags = new HashSet<>(personToCopy.getImmutableGroupTags());
-        moduleTags = new HashSet<>(personToCopy.getImmutableModuleTags());
+        moduleTags = new HashSet<>(personToCopy.getImmutableModuleCodes());
         telegramHandle = personToCopy.getTelegramHandle();
         contactIndex = personToCopy.getContactIndex();
     }

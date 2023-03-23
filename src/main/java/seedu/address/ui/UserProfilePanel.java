@@ -59,8 +59,8 @@ public class UserProfilePanel extends UiPart<Region> {
         email.setText(EMAIL + this.user.getEmail());
         address.setText(ADDRESS + this.user.getAddress());
         telegramHandle.setText(TELEGRAM + this.user.getTelegramHandle());
-        moduleTags.setText(MODULE_TAGS + this.user.getModuleTags());
-        groupTags.setText(GROUP_TAGS + this.user.getGroupTags().toString());
+        moduleTags.setText(MODULE_TAGS + this.user.getModuleTagSet());
+        groupTags.setText(GROUP_TAGS + this.user.getGroupTagSet().toString());
     }
 
     /**
@@ -73,7 +73,7 @@ public class UserProfilePanel extends UiPart<Region> {
         email.setText(EMAIL + person.getEmail());
         address.setText(ADDRESS + person.getAddress());
         telegramHandle.setText(TELEGRAM + person.getTelegramHandle());
-        moduleTags.setText(MODULE_TAGS + person.getModuleTags());
-        groupTags.setText(GROUP_TAGS + person.getGroupTags().toString());
+        moduleTags.setText(MODULE_TAGS + person.getModuleTagSet());
+        groupTags.setText(GROUP_TAGS + person.getGroupTagSet().toString());
     }
 }

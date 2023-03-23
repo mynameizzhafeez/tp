@@ -21,8 +21,8 @@ public class SortCommandParser implements Parser<SortCommand> {
     private static final HashMap<Prefix, Comparator<Person>> COMPARATOR_HASH_MAP = new HashMap<>() {{
             put(Prefix.ADDRESS, Comparator.comparing(Person::getAddress));
             put(Prefix.EMAIL, Comparator.comparing(Person::getEmail));
-            put(Prefix.GROUP_TAG, Comparator.comparing(Person::getGroupTags));
-            put(Prefix.MODULE_TAG, Comparator.comparing(Person::getModuleTags));
+            put(Prefix.GROUP_TAG, Comparator.comparing(Person::getGroupTagSet));
+            put(Prefix.MODULE_TAG, Comparator.comparing(Person::getModuleTagSet));
             put(Prefix.NAME, Comparator.comparing(Person::getName));
             put(Prefix.PHONE, Comparator.comparing(Person::getPhone));
             put(Prefix.TELEGRAM_HANDLE, Comparator.comparing(Person::getTelegramHandle));

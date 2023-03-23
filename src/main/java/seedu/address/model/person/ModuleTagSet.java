@@ -3,15 +3,14 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import seedu.address.model.commitment.Lesson;
 import seedu.address.model.tag.ModuleTag;
-import seedu.address.model.timetable.Lesson;
 
 /**
  * This class was added to facilitate the Sort Command.
@@ -24,23 +23,20 @@ public class ModuleTagSet implements Comparable<ModuleTagSet> {
      */
     private static final int DISPLAY_LIMIT = 10;
 
-    private final Set<ModuleTag> modules;
+    private final HashMap<String, ModuleTag> modules;
 
     /**
      * We want to find the modules in common with the user.
      * As such, we want to keep track of what modules the user has.
      */
-    private Set<ModuleTag> commonModules;
-
-    private final HashMap<ModuleTag, Set<Lesson>> lessons;
+    private Set<String> commonModules;
 
     /**
      * Initialises a new ModuleTagSet.
      */
     public ModuleTagSet() {
-        modules = new HashSet<>();
+        modules = new HashMap<>();
         commonModules = new HashSet<>();
-        this.lessons = new HashMap<ModuleTag, Set<Lesson>>();
     }
 
     /**
@@ -48,10 +44,14 @@ public class ModuleTagSet implements Comparable<ModuleTagSet> {
      * Gives access from outside classes to this set.
      */
     public void add(ModuleTag moduleTag) {
-        modules.add(moduleTag);
-        if (!this.lessons.containsKey(moduleTag)) {
-            this.lessons.put(moduleTag, new HashSet<Lesson>());
+        String tagName = moduleTag.getTagName();
+        if (!modules.containsKey(tagName)) {
+            modules.put(moduleTag.tagName, moduleTag);
+            return;
         }
+
+        ModuleTag updatedModuleTag = modules.get(tagName).mergeWith(moduleTag);
+        modules.put(moduleTag.tagName, updatedModuleTag);
     }
 
     /**
@@ -59,26 +59,7 @@ public class ModuleTagSet implements Comparable<ModuleTagSet> {
      * Gives access from outside classes to this set.
      */
     public void addAll(Collection<? extends ModuleTag> moduleTags) {
-        for (ModuleTag tag : moduleTags) {
-            if (tag.isBasicTag()) {
-                modules.add(tag);
-            }
-        }
-    }
-
-    /**
-     * Adds lesson to the HashMap of sets of lessons.
-     *
-     * @param hash Module to act as the key.
-     * @param lesson Lesson to be inserted.
-     */
-    public void addLesson(ModuleTag hash, Lesson lesson) {
-        if (!this.lessons.containsKey(hash)) {
-            this.lessons.put(hash, new HashSet<Lesson>());
-            // should never come here.
-        }
-        modules.add(hash);
-        this.lessons.get(hash).add(lesson);
+        moduleTags.forEach(this::add);
     }
 
     /**
@@ -86,8 +67,15 @@ public class ModuleTagSet implements Comparable<ModuleTagSet> {
      * Gives access from outside classes to this set.
      */
     public void remove(ModuleTag moduleTag) {
-        modules.remove(moduleTag);
-        this.lessons.remove(moduleTag);
+        String tagName = moduleTag.getTagName();
+        if (!modules.containsKey(tagName)) {
+            return;
+        }
+
+        for (Lesson l : moduleTag.getLessons()) {
+
+        }
+        modules.remove(moduleTag.tagName);
     }
 
     /**
@@ -95,23 +83,7 @@ public class ModuleTagSet implements Comparable<ModuleTagSet> {
      * Gives access from outside classes to this set.
      */
     public void removeAll(Collection<? extends ModuleTag> moduleTags) {
-        for (ModuleTag tag : moduleTags) {
-            if (tag.isBasicTag()) {
-                this.remove(tag);
-            }
-        }
-    }
-
-    /**
-     * Removes a lesson from the HashMap of Set of Lessons.
-     * @param hash ModuleTag to act as key
-     * @param lesson Lesson to be removed
-     */
-    public void removeLesson(ModuleTag hash, Lesson lesson) {
-        if (!this.lessons.containsKey(hash)) {
-            return;
-        }
-        this.lessons.get(hash).remove(lesson);
+        moduleTags.forEach(this::remove);
     }
 
     /**
@@ -128,18 +100,37 @@ public class ModuleTagSet implements Comparable<ModuleTagSet> {
         requireNonNull(userModuleTags);
 
         // we make a copy so that retainAll does not destroy this set
-        commonModules = new HashSet<>(modules);
+        commonModules = new HashSet<>(modules.keySet());
 
         // finds the intersection between user modules and person modules
-        commonModules.retainAll(userModuleTags);
+        Set<String> userModules = userModuleTags.stream()
+                .map(ModuleTag::getTagName).collect(Collectors.toSet());
+        commonModules.retainAll(userModules);
+    }
+
+    /**
+     * Returns an immutable modules, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<String> getImmutableModuleCodes() {
+        return Set.copyOf(modules.keySet());
     }
 
     /**
      * Returns an immutable module tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<ModuleTag> getImmutableModules() {
-        return Collections.unmodifiableSet(modules);
+    public Set<ModuleTag> getImmutableModuleTags() {
+        return Set.copyOf(modules.values());
+    }
+
+    /**
+     * Returns an immutable modules, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     * Modules are those in common with the user.
+     */
+    public Set<String> getImmutableCommonModuleCodes() {
+        return Set.copyOf(commonModules);
     }
 
     /**
@@ -147,8 +138,8 @@ public class ModuleTagSet implements Comparable<ModuleTagSet> {
      * if modification is attempted.
      * Modules are those in common with the user.
      */
-    public Set<ModuleTag> getImmutableCommonModules() {
-        return Collections.unmodifiableSet(commonModules);
+    public Set<ModuleTag> getImmutableCommonModuleTags() {
+        return commonModules.stream().map(modules::get).collect(Collectors.toSet());
     }
 
     /**
@@ -156,9 +147,9 @@ public class ModuleTagSet implements Comparable<ModuleTagSet> {
      * if modification is attempted.
      * Modules are those not in common with the user.
      */
-    public Set<ModuleTag> getUncommonModuleTags() {
+    public Set<String> getUncommonModules() {
         // finds modules that are not in common with the user.
-        Set<ModuleTag> uncommonModuleTags = new HashSet<>(modules);
+        Set<String> uncommonModuleTags = new HashSet<>(modules.keySet());
         uncommonModuleTags.removeAll(commonModules);
         return uncommonModuleTags;
     }
@@ -172,10 +163,9 @@ public class ModuleTagSet implements Comparable<ModuleTagSet> {
 
     @Override
     public String toString() {
-        Stream<ModuleTag> commonModulesFirst = Stream.concat(commonModules.stream().sorted(),
-                getUncommonModuleTags().stream().sorted());
+        Stream<String> commonModulesFirst = Stream.concat(commonModules.stream().sorted(),
+                getUncommonModules().stream().sorted());
         String modulesString = commonModulesFirst
-                .map(ModuleTag::toString)
                 .limit(DISPLAY_LIMIT)
                 .collect(Collectors.joining(" | "));
         // whether the size exceeds the display limit
@@ -194,19 +184,5 @@ public class ModuleTagSet implements Comparable<ModuleTagSet> {
     public int compareTo(ModuleTagSet otherModuleTagSet) {
         return Integer.compare(getNumberOfCommonModules(),
                 otherModuleTagSet.getNumberOfCommonModules());
-    }
-
-    /**
-     * Alternative toString method to generate the Lessons as a String.
-     * @return String of lessons.
-     */
-    public String lessonsAsStr() {
-        String result = "";
-        for (ModuleTag hash: lessons.keySet()) {
-            result = result + hash;
-            result = result + lessons.get(hash).toString();
-            result = result + "\n";
-        }
-        return result;
     }
 }

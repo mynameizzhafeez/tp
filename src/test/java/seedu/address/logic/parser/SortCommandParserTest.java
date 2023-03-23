@@ -66,19 +66,19 @@ public class SortCommandParserTest {
 
         // group tags
         testSinglePrefix(String.format(" %s", Prefix.GROUP_TAG.getPrefix()),
-                Comparator.comparing(Person::getGroupTags), "Group Tags: Descending");
+                Comparator.comparing(Person::getGroupTagSet), "Group Tags: Descending");
         testSinglePrefix(String.format(" %sa", Prefix.GROUP_TAG.getPrefix()),
-                Comparator.comparing(Person::getGroupTags), "Group Tags: Ascending");
+                Comparator.comparing(Person::getGroupTagSet), "Group Tags: Ascending");
         testSinglePrefix(String.format(" %sd", Prefix.GROUP_TAG.getPrefix()),
-                Comparator.comparing(Person::getGroupTags), "Group Tags: Descending");
+                Comparator.comparing(Person::getGroupTagSet), "Group Tags: Descending");
 
         // module tags
         testSinglePrefix(String.format(" %s", Prefix.MODULE_TAG.getPrefix()),
-                Comparator.comparing(Person::getModuleTags), "Module Tags: Descending");
+                Comparator.comparing(Person::getModuleTagSet), "Module Tags: Descending");
         testSinglePrefix(String.format(" %sa", Prefix.MODULE_TAG.getPrefix()),
-                Comparator.comparing(Person::getModuleTags), "Module Tags: Ascending");
+                Comparator.comparing(Person::getModuleTagSet), "Module Tags: Ascending");
         testSinglePrefix(String.format(" %sd", Prefix.MODULE_TAG.getPrefix()),
-                Comparator.comparing(Person::getModuleTags), "Module Tags: Descending");
+                Comparator.comparing(Person::getModuleTagSet), "Module Tags: Descending");
     }
 
     @Test

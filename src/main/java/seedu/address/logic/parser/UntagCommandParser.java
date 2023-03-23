@@ -6,6 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ContactIndex;
@@ -23,24 +24,24 @@ public class UntagCommandParser implements Parser<UntagCommand> {
      */
     public UntagCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argumentMultiMap = ArgumentTokenizer.tokenize(args, Prefix.MODULE_TAG);
+        ArgumentMultimap argMultiMap = ArgumentTokenizer.tokenize(args, Prefix.MODULE_TAG);
 
         ContactIndex contactIndex;
 
         try {
-            contactIndex = ParserUtil.parseContactIndex(argumentMultiMap.getPreamble());
+            contactIndex = ParserUtil.parseContactIndex(argMultiMap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UntagCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE), pe);
         }
 
-        Optional<Set<ModuleTag>> modulesToRemove =
-                ParserUtil.parseModuleTagsForCommands(argumentMultiMap.getAllValues(Prefix.MODULE_TAG));
+        Set<ModuleTag> modulesToRemove =
+                ParserUtil.parseModuleTags(argMultiMap.getAllValues(Prefix.MODULE_TAG));
 
         if (modulesToRemove.isEmpty()) {
-            throw new ParseException(UntagCommand.MESSAGE_NO_TAGS);
+            throw new ParseException(TagCommand.MESSAGE_NO_TAGS);
         }
 
-        return new UntagCommand(contactIndex, modulesToRemove.get());
+        return new UntagCommand(contactIndex, modulesToRemove);
     }
 
 }

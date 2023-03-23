@@ -48,7 +48,7 @@ public class ModuleTagSetTest {
     @Test
     public void getImmutableModules_tryEdit_throwsUnsupportedOperationException() {
         ModuleTagSet moduleTagSet = new ModuleTagSet();
-        Set<ModuleTag> immutableSet = moduleTagSet.getImmutableModules();
+        Set<ModuleTag> immutableSet = moduleTagSet.getImmutableModuleCodes();
 
         assertThrows(UnsupportedOperationException.class, () -> immutableSet.add(MODULE_TAG_1));
     }
@@ -56,7 +56,7 @@ public class ModuleTagSetTest {
     @Test
     public void getImmutableCommonModules_tryEdit_throwsUnsupportedOperationException() {
         ModuleTagSet moduleTagSet = new ModuleTagSet();
-        Set<ModuleTag> immutableSet = moduleTagSet.getImmutableCommonModules();
+        Set<ModuleTag> immutableSet = moduleTagSet.getImmutableCommonModuleCodes();
 
         assertThrows(UnsupportedOperationException.class, () -> immutableSet.add(MODULE_TAG_1));
     }
@@ -65,11 +65,11 @@ public class ModuleTagSetTest {
     public void compareTo() {
         ModuleTagSet moduleTagSet = new ModuleTagSet();
         moduleTagSet.add(MODULE_TAG_2); // GEA1000 not in LINUS
-        moduleTagSet.setCommonModules(TypicalUser.LINUS.getImmutableModuleTags());
+        moduleTagSet.setCommonModules(TypicalUser.LINUS.getImmutableModuleCodes());
 
         ModuleTagSet commonModuleTagSet = new ModuleTagSet();
         commonModuleTagSet.add(MODULE_TAG_1); // CS2100 is in LINUS
-        commonModuleTagSet.setCommonModules(TypicalUser.LINUS.getImmutableModuleTags());
+        commonModuleTagSet.setCommonModules(TypicalUser.LINUS.getImmutableModuleCodes());
 
         assertEquals(-1, moduleTagSet.compareTo(commonModuleTagSet));
         assertEquals(1, commonModuleTagSet.compareTo(moduleTagSet));
@@ -77,7 +77,7 @@ public class ModuleTagSetTest {
         assertEquals(0, moduleTagSet.getNumberOfCommonModules());
         assertEquals(1, commonModuleTagSet.getNumberOfCommonModules());
 
-        assertEquals(0, moduleTagSet.getImmutableCommonModules().size());
+        assertEquals(0, moduleTagSet.getImmutableCommonModuleCodes().size());
         assertEquals(1, moduleTagSet.getUncommonModuleTags().size());
     }
 }

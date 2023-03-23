@@ -11,13 +11,13 @@ import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.IndexHandler;
 import seedu.address.model.Model;
-import seedu.address.model.location.DistanceUtil;
+import seedu.address.model.location.util.LocationUtil;
 import seedu.address.model.location.Location;
 import seedu.address.model.person.ContactIndex;
-import seedu.address.model.scheduler.Scheduler;
-import seedu.address.model.timetable.Timetable;
-import seedu.address.model.timetable.time.TimePeriod;
-import seedu.address.model.timetable.time.util.TimeUtils;
+import seedu.address.model.recommender.Recommender;
+import seedu.address.model.recommender.Schedule;
+import seedu.address.model.time.TimePeriod;
+import seedu.address.model.time.util.TimeUtil;
 
 /**
  * Based on a list of people, recommends a list of places to eat and/or study.
@@ -34,7 +34,7 @@ public class MeetCommand extends Command {
     public static final String MESSAGE_USAGE =
             String.format("%s/%s/%s", EAT_COMMAND_WORD, STUDY_COMMAND_WORD, MEET_COMMAND_WORD)
                     + ": Recommends locations to eat/study/meet based on the indices of the people.";
-    private static final Timetable EMPTY_TIMETABLE = new Timetable();
+    private static final Schedule EMPTY_TIMETABLE = new Schedule();
 
     private final Set<ContactIndex> indices;
     private final Collection<Location> locations;
@@ -70,10 +70,10 @@ public class MeetCommand extends Command {
 
         List<Location> locationsOfPersons = getAllAddresses(model);
         List<? extends Location> recommendations = giveRecommendations(locationsOfPersons);
-        Scheduler scheduler = new Scheduler(model).initialise(indices);
-        scheduler.addTimetable(EMPTY_TIMETABLE);
-        scheduler.addTimetable(EMPTY_TIMETABLE);
-        List<TimePeriod> recommendedTimings = scheduler.getAllTimings();
+        Recommender recommender = new Recommender(model, indices);
+        recommender.addSchedule(EMPTY_TIMETABLE);
+        recommender.addSchedule(EMPTY_TIMETABLE);
+        List<TimePeriod> recommendedTimings = recommender.getAllTimings();
         // only recommend locations if there is a common timing available amongst ALL participants
         if (recommendedTimings.isEmpty()) {
             return new CommandResult(MESSAGE_NO_COMMON_TIME);
@@ -83,11 +83,11 @@ public class MeetCommand extends Command {
         // @zichen This is the entry point.
         StringBuilder sb = new StringBuilder();
         sb.append(MESSAGE_SUCCESS);
-        recommendedTimings.forEach(timings -> sb.append("\n").append(timings.getSchoolDay())
+        recommendedTimings.forEach(timings -> sb.append("\n").append(timings.getDay())
             .append("\n")
             .append(String.format("Start: %s  End: %s\n",
-                TimeUtils.formatLocalTime(timings.getStartTime()),
-                TimeUtils.formatLocalTime(timings.getEndTime()))));
+                TimeUtil.formatLocalTime(timings.getStartTime()),
+                TimeUtil.formatLocalTime(timings.getEndTime()))));
         recommendations.forEach(location -> sb.append("\n").append(location.getName()));
 
         return new CommandResult(sb.toString());
@@ -130,8 +130,8 @@ public class MeetCommand extends Command {
      * and returns the closest destinations to that midpoint.
      */
     private List<? extends Location> giveRecommendations(List<? extends Location> locationsOfPersons) {
-        Location midpoint = DistanceUtil.getMidpoint(locationsOfPersons);
-        return DistanceUtil.getClosestPoints(midpoint, numberOfRecommendations, locations);
+        Location midpoint = LocationUtil.getMidpoint(locationsOfPersons);
+        return LocationUtil.getClosestPoints(midpoint, numberOfRecommendations, locations);
     }
 
     @Override

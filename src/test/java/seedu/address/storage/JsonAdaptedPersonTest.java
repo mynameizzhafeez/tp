@@ -38,7 +38,7 @@ public class JsonAdaptedPersonTest {
             .map(JsonAdaptedGroupTag::new)
             .collect(Collectors.toList());
     private static final List<JsonAdaptedModuleTag> VALID_MODULE_TAGS =
-            BART.getImmutableModuleTags().stream()
+            BART.getImmutableModuleCodes().stream()
             .map(JsonAdaptedModuleTag::new)
             .collect(Collectors.toList());
 

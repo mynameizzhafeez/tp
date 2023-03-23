@@ -5,6 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 
 import java.util.Optional;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -33,13 +34,13 @@ public class TagCommandParser implements Parser<TagCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE), pe);
         }
 
-        Optional<Set<ModuleTag>> modulesToAdd =
-                ParserUtil.parseModuleTagsForCommands(argMultiMap.getAllValues(Prefix.MODULE_TAG));
+        Set<ModuleTag> modulesToAdd =
+                ParserUtil.parseModuleTags(argMultiMap.getAllValues(Prefix.MODULE_TAG));
 
         if (modulesToAdd.isEmpty()) {
             throw new ParseException(TagCommand.MESSAGE_NO_TAGS);
         }
 
-        return new TagCommand(contactIndex, modulesToAdd.get());
+        return new TagCommand(contactIndex, modulesToAdd);
     }
 }
