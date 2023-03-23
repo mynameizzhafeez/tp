@@ -10,7 +10,7 @@ import org.joda.time.LocalTime;
 public class HourBlock extends TimePeriod {
 
     public HourBlock(LocalTime startTime, Day day) {
-        super(startTime, startTime.plusHours(1), day);
+        super(startTime, startTime.plusHours(1).minusMinutes(1), day);
     }
 
     /**

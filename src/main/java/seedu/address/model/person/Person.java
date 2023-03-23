@@ -2,11 +2,19 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.commitment.Commitment;
+import seedu.address.model.commitment.Lesson;
 import seedu.address.model.recommender.Schedule;
+import seedu.address.model.recommender.exceptions.CommitmentClashException;
 import seedu.address.model.tag.GroupTag;
 import seedu.address.model.tag.ModuleTag;
 
@@ -44,7 +52,7 @@ public class Person {
         this.telegramHandle = telegramHandle;
         this.contactIndex = contactIndex;
         this.groupTagSet.addAll(groupTags);
-        this.moduleTagSet.addAll(moduleTags);
+        addModuleTags(moduleTags);
     }
 
     public Name getName() {
@@ -133,19 +141,59 @@ public class Person {
     }
 
     /**
+     * Gets the lessons of the person.
+     */
+    public Set<? extends Lesson> getLessons() {
+        Set<Lesson> lessons = new HashSet<>();
+        for (ModuleTag moduleTag : getImmutableModuleTags()) {
+            lessons.addAll(moduleTag.getLessons());
+        }
+        return lessons;
+    }
+
+    /**
+     * Gets the commitments of the person.
+     * We put this here as futureproofing.
+     */
+    public Set<? extends Commitment> getCommitments() {
+        return getLessons();
+    }
+
+    /**
      * Returns the schedule of the person.
      */
     public Schedule getSchedule() {
         return schedule;
     }
 
-    public void addCommitment(Commitment commitment) {
+    public void addCommitment(Commitment commitment) throws CommitmentClashException {
         requireAllNonNull(commitment);
         schedule.addCommitment(commitment);
     }
 
+    public void addModuleTags(Collection<ModuleTag> moduleTags) {
+        for (ModuleTag moduleTag : moduleTags) {
+            // Here we keep the lessons that successfully
+            // can be added to the Schedule.
+            List<Lesson> insertableLessons = new ArrayList<>();
+            for (Lesson lesson : moduleTag.getLessons()) {
+                try {
+                    addCommitment(lesson);
+                    insertableLessons.add(lesson);
+                } catch (CommitmentClashException cce) {
+                    continue;
+                }
+            }
+            if (!insertableLessons.isEmpty()) {
+                // we update the module tag to only include
+                // lessons that have successfully been added
+                moduleTagSet.add(new ModuleTag(moduleTag.tagName, insertableLessons));
+            }
+        }
+    }
+
     public void addModuleTags(ModuleTag... moduleTags) {
-        moduleTagSet.addAll(Set.of(moduleTags));
+        addModuleTags(List.of(moduleTags));
     }
 
     public void removeModuleTags(ModuleTag... moduleTags) {
@@ -221,16 +269,16 @@ public class Person {
                 .append(getImmutableGroupTags())
                 .append("\nModules: ")
                 .append(getImmutableModuleCodes())
-                .append("\nLessons: ")
-                .append(getLessonsAsStr());
+                .append("\nCommitments: ")
+                .append(getCommitmentsAsStr());
 
         return builder.toString();
     }
 
-    public String getLessonsAsStr() {
-        return moduleTagSet.getImmutableModuleTags()
-                .stream().map(ModuleTag::getLessonsAsStr)
-                .collect(Collectors.joining("\n"));
+    public String getCommitmentsAsStr() {
+        return getCommitments().stream()
+                .map(Commitment::toString)
+                .collect(Collectors.joining(", "));
     }
 
 }

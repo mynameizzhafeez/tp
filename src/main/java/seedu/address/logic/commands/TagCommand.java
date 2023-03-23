@@ -78,8 +78,7 @@ public class TagCommand extends Command {
         return new CommandResult(String.format(MESSAGE_TAG_PERSON_SUCCESS
                 + "Name: " + personToEdit.getName().toString() + '\n'
                 + "Modules: " + personToEdit.getImmutableModuleCodes().toString() + '\n'
-                + "Module(s) in common: " + personToEdit.getImmutableCommonModuleCodes().toString() + '\n'
-                + "Lessons: " + personToEdit.getLessonsAsStr()));
+                + "Module(s) in common: " + personToEdit.getImmutableCommonModuleCodes().toString() + '\n'));
     }
 
     /**
@@ -99,8 +98,7 @@ public class TagCommand extends Command {
 
         return new CommandResult(String.format(MESSAGE_TAG_USER_SUCCESS
                 + "Name: " + editedUser.getName().toString() + '\n'
-                + "Modules: " + editedUser.getImmutableModuleCodes().toString() + '\n'
-                + "Lessons: " + editedUser.getLessonsAsStr()));
+                + "Modules: " + editedUser.getImmutableModuleCodes().toString() + '\n'));
 
     }
 

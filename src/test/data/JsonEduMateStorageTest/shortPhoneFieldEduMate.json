@@ -21,22 +21,131 @@
   },
   "persons": [
     {
-      "name": "Adam Tan",
-      "email": "adamtan@gmail.com",
-      "telegramHandle": "@adamtan",
-      "address": "Tan Kah Kee",
+      "name": "Ruby McPherson",
+      "email": "rubymcpherson@gmail.com",
+      "telegramHandle": "@rubymcpherson",
+      "address": "MacPherson",
       "groups": [
-        "TA"
+        "TA",
+        "CCA"
       ],
       "phone": "23",
-      "index": 82,
       "modules": [
-        "IE2141",
-        "CE2183",
-        "LAV2201",
-        "BT2103",
-        "LAK3201",
-        "CS2101"
+        {
+          "moduleCode": "CS4211",
+          "lessons": [
+            {
+              "startHour": 18,
+              "endHour": 19,
+              "day": "TUESDAY"
+            },
+            {
+              "startHour": 15,
+              "endHour": 16,
+              "day": "MONDAY"
+            },
+            {
+              "startHour": 11,
+              "endHour": 13,
+              "day": "MONDAY"
+            }
+          ]
+        },
+        {
+          "moduleCode": "ST2131",
+          "lessons": [
+            {
+              "startHour": 18,
+              "endHour": 19,
+              "day": "MONDAY"
+            },
+            {
+              "startHour": 15,
+              "endHour": 17,
+              "day": "THURSDAY"
+            },
+            {
+              "startHour": 12,
+              "endHour": 14,
+              "day": "THURSDAY"
+            }
+          ]
+        },
+        {
+          "moduleCode": "CS2108",
+          "lessons": [
+            {
+              "startHour": 12,
+              "endHour": 13,
+              "day": "MONDAY"
+            },
+            {
+              "startHour": 15,
+              "endHour": 17,
+              "day": "THURSDAY"
+            },
+            {
+              "startHour": 18,
+              "endHour": 20,
+              "day": "FRIDAY"
+            }
+          ]
+        },
+        {
+          "moduleCode": "LAR2201",
+          "lessons": [
+            {
+              "startHour": 11,
+              "endHour": 13,
+              "day": "WEDNESDAY"
+            },
+            {
+              "startHour": 19,
+              "endHour": 20,
+              "day": "WEDNESDAY"
+            },
+            {
+              "startHour": 8,
+              "endHour": 9,
+              "day": "THURSDAY"
+            }
+          ]
+        },
+        {
+          "moduleCode": "CS2106",
+          "lessons": [
+            {
+              "startHour": 9,
+              "endHour": 11,
+              "day": "WEDNESDAY"
+            },
+            {
+              "startHour": 12,
+              "endHour": 13,
+              "day": "WEDNESDAY"
+            }
+          ]
+        },
+        {
+          "moduleCode": "PP5660",
+          "lessons": [
+            {
+              "startHour": 13,
+              "endHour": 14,
+              "day": "MONDAY"
+            },
+            {
+              "startHour": 18,
+              "endHour": 19,
+              "day": "MONDAY"
+            },
+            {
+              "startHour": 14,
+              "endHour": 16,
+              "day": "MONDAY"
+            }
+          ]
+        }
       ]
     }
   ]

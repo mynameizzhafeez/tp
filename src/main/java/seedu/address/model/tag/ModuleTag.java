@@ -33,7 +33,6 @@ public class ModuleTag extends Tag implements Comparable<ModuleTag> {
     public ModuleTag(String moduleCode) {
         super(moduleCode);
         requireNonNull(moduleCode);
-        System.out.println(moduleCode);
         checkArgument(isValidTagName(moduleCode), MESSAGE_CONSTRAINTS);
         this.lessons = new HashSet<>();
     }
@@ -61,6 +60,7 @@ public class ModuleTag extends Tag implements Comparable<ModuleTag> {
     }
 
     public ModuleTag mergeWith(ModuleTag otherModuleTag) {
+        assert tagName.equals(otherModuleTag.tagName);
         Set<Lesson> newLessons = new HashSet<>(lessons);
         newLessons.addAll(otherModuleTag.lessons);
         return new ModuleTag(tagName, newLessons);

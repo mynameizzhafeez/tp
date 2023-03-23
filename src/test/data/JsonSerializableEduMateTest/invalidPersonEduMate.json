@@ -21,22 +21,100 @@
   },
   "persons": [
     {
-      "name": "Amirah Tan",
-      "email": "amirahtan@gmail.com",
-      "telegramHandle": "@amirahtan",
-      "address": "Tanah Merah",
+      "name": "George Richards",
+      "email": "georgerichards@gmail.com",
+      "telegramHandle": "@georgerichards",
+      "address": "Kent Ridge",
       "groups": [
-        "Groupmate"
+        "CCA"
       ],
       "phone": "3895as4665",
-      "index": 33,
       "modules": [
-        "CS2104",
-        "CS2102",
-        "IS2101",
-        "CS4347",
-        "CS2108",
-        "BT2101"
+        {
+          "moduleCode": "CS2113",
+          "lessons": [
+            {
+              "startHour": 18,
+              "endHour": 20,
+              "day": "FRIDAY"
+            },
+            {
+              "startHour": 19,
+              "endHour": 20,
+              "day": "MONDAY"
+            }
+          ]
+        },
+        {
+          "moduleCode": "PH5430",
+          "lessons": [
+            {
+              "startHour": 13,
+              "endHour": 15,
+              "day": "WEDNESDAY"
+            }
+          ]
+        },
+        {
+          "moduleCode": "ST2137",
+          "lessons": [
+            {
+              "startHour": 17,
+              "endHour": 19,
+              "day": "MONDAY"
+            },
+            {
+              "startHour": 19,
+              "endHour": 20,
+              "day": "WEDNESDAY"
+            }
+          ]
+        },
+        {
+          "moduleCode": "CS2103",
+          "lessons": [
+            {
+              "startHour": 16,
+              "endHour": 18,
+              "day": "WEDNESDAY"
+            },
+            {
+              "startHour": 10,
+              "endHour": 11,
+              "day": "THURSDAY"
+            },
+            {
+              "startHour": 8,
+              "endHour": 9,
+              "day": "FRIDAY"
+            }
+          ]
+        },
+        {
+          "moduleCode": "CS2107",
+          "lessons": [
+            {
+              "startHour": 13,
+              "endHour": 14,
+              "day": "THURSDAY"
+            },
+            {
+              "startHour": 8,
+              "endHour": 10,
+              "day": "FRIDAY"
+            }
+          ]
+        },
+        {
+          "moduleCode": "SN2261",
+          "lessons": [
+            {
+              "startHour": 13,
+              "endHour": 14,
+              "day": "MONDAY"
+            }
+          ]
+        }
       ]
     }
   ]

@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
@@ -15,6 +16,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.EduMate;
 import seedu.address.model.ReadOnlyEduMate;
 import seedu.address.model.person.Address;
@@ -132,10 +135,24 @@ public class SampleDataUtil {
         Address address = new Address(personDataList.get(3));
         TelegramHandle telegramHandle = new TelegramHandle(personDataList.get(4));
         Set<GroupTag> groupTagSet = getGroupTagSetFromUnsplitted(personDataList.get(5));
-        Set<ModuleTag> moduleTagSet = getModuleTagSetFromUnsplitted(personDataList.get(6));
+        Set<ModuleTag> moduleTagSet = getModuleTagSetFromText(personDataList.get(6));
+        System.out.println(moduleTagSet);
 
         return new Person(name, phone, email, address,
                 telegramHandle, contactIndex, groupTagSet, moduleTagSet);
+    }
+
+    private static Set<ModuleTag> getModuleTagSetFromText(String text) {
+        String trimmedText = text.trim();
+        Set<ModuleTag> moduleTags = new HashSet<>();
+        for (String lessonAsStr : trimmedText.split(",")) {
+            try {
+                moduleTags.add(ParserUtil.parseModuleTag(lessonAsStr.trim()));
+            } catch(ParseException pe) {
+                continue;
+            }
+        }
+        return moduleTags;
     }
 
     /**

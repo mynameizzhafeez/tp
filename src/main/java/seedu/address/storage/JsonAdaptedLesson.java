@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.joda.time.LocalTime;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.parser.ParserUtil;
@@ -17,7 +18,10 @@ public class JsonAdaptedLesson {
      * {@code startHour}, {@code endHour}, {@code day}.
      */
     @JsonCreator
-    public JsonAdaptedLesson(Integer startHour, Integer endHour, String day) {
+    public JsonAdaptedLesson(
+            @JsonProperty("startHour") Integer startHour,
+            @JsonProperty("endHour") Integer endHour,
+            @JsonProperty("day") String day) {
         this.startHour = startHour;
         this.endHour = endHour;
         this.day = day;

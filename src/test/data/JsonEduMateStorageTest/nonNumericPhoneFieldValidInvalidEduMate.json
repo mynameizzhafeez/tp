@@ -21,22 +21,103 @@
   },
   "persons": [
     {
-      "name": "Dakota Dunman",
-      "email": "dakotadunman@gmail.com",
-      "telegramHandle": "@dakotadunman",
-      "address": "Dakota",
-      "groups": [
-        "CCA"
-      ],
+      "name": "Su De",
+      "email": "sude@gmail.com",
+      "telegramHandle": "@sude",
+      "address": "Soo Teck",
+      "groups": [],
       "phone": "3895as4665",
-      "index": 62,
       "modules": [
-        "GE2102",
-        "QF3101",
-        "LLJ5203",
-        "CS2104",
-        "ST2132",
-        "CM3261"
+        {
+          "moduleCode": "BT2101",
+          "lessons": [
+            {
+              "startHour": 13,
+              "endHour": 14,
+              "day": "FRIDAY"
+            }
+          ]
+        },
+        {
+          "moduleCode": "CS2220",
+          "lessons": [
+            {
+              "startHour": 15,
+              "endHour": 16,
+              "day": "MONDAY"
+            },
+            {
+              "startHour": 9,
+              "endHour": 11,
+              "day": "MONDAY"
+            }
+          ]
+        },
+        {
+          "moduleCode": "PC2020",
+          "lessons": [
+            {
+              "startHour": 14,
+              "endHour": 16,
+              "day": "MONDAY"
+            },
+            {
+              "startHour": 8,
+              "endHour": 10,
+              "day": "THURSDAY"
+            },
+            {
+              "startHour": 11,
+              "endHour": 12,
+              "day": "MONDAY"
+            }
+          ]
+        },
+        {
+          "moduleCode": "CS2103",
+          "lessons": [
+            {
+              "startHour": 9,
+              "endHour": 10,
+              "day": "MONDAY"
+            },
+            {
+              "startHour": 18,
+              "endHour": 19,
+              "day": "WEDNESDAY"
+            }
+          ]
+        },
+        {
+          "moduleCode": "CS2107",
+          "lessons": [
+            {
+              "startHour": 9,
+              "endHour": 10,
+              "day": "TUESDAY"
+            },
+            {
+              "startHour": 10,
+              "endHour": 11,
+              "day": "FRIDAY"
+            },
+            {
+              "startHour": 16,
+              "endHour": 18,
+              "day": "TUESDAY"
+            }
+          ]
+        },
+        {
+          "moduleCode": "CP3108A",
+          "lessons": [
+            {
+              "startHour": 12,
+              "endHour": 14,
+              "day": "FRIDAY"
+            }
+          ]
+        }
       ]
     }
   ]

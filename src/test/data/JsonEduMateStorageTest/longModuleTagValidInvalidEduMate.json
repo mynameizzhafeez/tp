@@ -21,15 +21,15 @@
   },
   "persons": [
     {
-      "name": "Amirah Tan",
-      "email": "amirahtan@gmail.com",
-      "telegramHandle": "@amirahtan",
-      "address": "Tanah Merah",
+      "name": "Siti Halimah",
+      "email": "sitihalimah@gmail.com",
+      "telegramHandle": "@sitihalimah",
+      "address": "City Hall",
       "groups": [
+        "NS",
         "Groupmate"
       ],
-      "phone": "91965624",
-      "index": 33,
+      "phone": "88832931",
       "modules": [
         "CS2100",
         "DSAIS1101"

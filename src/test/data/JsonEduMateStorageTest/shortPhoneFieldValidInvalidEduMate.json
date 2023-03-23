@@ -21,22 +21,100 @@
   },
   "persons": [
     {
-      "name": "Quincy Dawson",
-      "email": "quincydawson@gmail.com",
-      "telegramHandle": "@quincydawson",
-      "address": "Queenstown",
+      "name": "Mihoko Minami",
+      "email": "mihokominami@gmail.com",
+      "telegramHandle": "@mihokominami",
+      "address": "South View",
       "groups": [
-        "Groupmate"
+        "JC"
       ],
       "phone": "23",
-      "index": 67,
       "modules": [
-        "CE2183",
-        "CS2105",
-        "BT2102",
-        "CS2101",
-        "CE2407A",
-        "CS2113"
+        {
+          "moduleCode": "CS2104",
+          "lessons": [
+            {
+              "startHour": 12,
+              "endHour": 14,
+              "day": "THURSDAY"
+            }
+          ]
+        },
+        {
+          "moduleCode": "CS2030S",
+          "lessons": [
+            {
+              "startHour": 12,
+              "endHour": 14,
+              "day": "WEDNESDAY"
+            }
+          ]
+        },
+        {
+          "moduleCode": "CS2102",
+          "lessons": [
+            {
+              "startHour": 11,
+              "endHour": 12,
+              "day": "TUESDAY"
+            }
+          ]
+        },
+        {
+          "moduleCode": "CS2040S",
+          "lessons": [
+            {
+              "startHour": 13,
+              "endHour": 14,
+              "day": "TUESDAY"
+            },
+            {
+              "startHour": 14,
+              "endHour": 16,
+              "day": "THURSDAY"
+            },
+            {
+              "startHour": 10,
+              "endHour": 12,
+              "day": "TUESDAY"
+            }
+          ]
+        },
+        {
+          "moduleCode": "BT4101",
+          "lessons": [
+            {
+              "startHour": 11,
+              "endHour": 13,
+              "day": "FRIDAY"
+            },
+            {
+              "startHour": 12,
+              "endHour": 13,
+              "day": "FRIDAY"
+            }
+          ]
+        },
+        {
+          "moduleCode": "CS2103T",
+          "lessons": [
+            {
+              "startHour": 17,
+              "endHour": 18,
+              "day": "MONDAY"
+            },
+            {
+              "startHour": 13,
+              "endHour": 14,
+              "day": "THURSDAY"
+            },
+            {
+              "startHour": 11,
+              "endHour": 12,
+              "day": "TUESDAY"
+            }
+          ]
+        }
       ]
     }
   ]

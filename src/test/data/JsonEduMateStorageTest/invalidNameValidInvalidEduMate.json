@@ -22,22 +22,117 @@
   "persons": [
     {
       "name": "Goon Se-Rang",
-      "email": "kishantharunika@gmail.com",
-      "telegramHandle": "@kishantharunika",
-      "address": "Bishan",
-      "groups": [
-        "NS",
-        "CCA"
-      ],
-      "phone": "95377101",
-      "index": 2,
+      "email": "angdeyi@gmail.com",
+      "telegramHandle": "@angdeyi",
+      "address": "Teck Ghee",
+      "groups": [],
+      "phone": "97469677",
       "modules": [
-        "CS3281",
-        "CS2102",
-        "CS2107",
-        "CS2108",
-        "CS2103",
-        "CS2105"
+        {
+          "moduleCode": "CS2107",
+          "lessons": [
+            {
+              "startHour": 13,
+              "endHour": 15,
+              "day": "MONDAY"
+            },
+            {
+              "startHour": 16,
+              "endHour": 17,
+              "day": "MONDAY"
+            },
+            {
+              "startHour": 11,
+              "endHour": 13,
+              "day": "THURSDAY"
+            }
+          ]
+        },
+        {
+          "moduleCode": "GEI1000",
+          "lessons": [
+            {
+              "startHour": 10,
+              "endHour": 11,
+              "day": "MONDAY"
+            },
+            {
+              "startHour": 13,
+              "endHour": 15,
+              "day": "WEDNESDAY"
+            },
+            {
+              "startHour": 18,
+              "endHour": 20,
+              "day": "FRIDAY"
+            }
+          ]
+        },
+        {
+          "moduleCode": "CS2102",
+          "lessons": [
+            {
+              "startHour": 18,
+              "endHour": 20,
+              "day": "TUESDAY"
+            },
+            {
+              "startHour": 14,
+              "endHour": 15,
+              "day": "TUESDAY"
+            },
+            {
+              "startHour": 17,
+              "endHour": 19,
+              "day": "TUESDAY"
+            }
+          ]
+        },
+        {
+          "moduleCode": "HI5104",
+          "lessons": [
+            {
+              "startHour": 18,
+              "endHour": 19,
+              "day": "FRIDAY"
+            },
+            {
+              "startHour": 11,
+              "endHour": 13,
+              "day": "MONDAY"
+            }
+          ]
+        },
+        {
+          "moduleCode": "CS2108",
+          "lessons": [
+            {
+              "startHour": 15,
+              "endHour": 17,
+              "day": "THURSDAY"
+            }
+          ]
+        },
+        {
+          "moduleCode": "BT2101",
+          "lessons": [
+            {
+              "startHour": 13,
+              "endHour": 14,
+              "day": "TUESDAY"
+            },
+            {
+              "startHour": 16,
+              "endHour": 18,
+              "day": "FRIDAY"
+            },
+            {
+              "startHour": 14,
+              "endHour": 15,
+              "day": "FRIDAY"
+            }
+          ]
+        }
       ]
     }
   ]

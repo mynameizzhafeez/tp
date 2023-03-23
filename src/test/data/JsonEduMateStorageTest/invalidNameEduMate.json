@@ -22,22 +22,99 @@
   "persons": [
     {
       "name": "Goon Se-Rang",
-      "email": "booneleigh@gmail.com",
-      "telegramHandle": "@booneleigh",
-      "address": "Boon Lay",
+      "email": "weiyi@gmail.com",
+      "telegramHandle": "@weiyi",
+      "address": "one-north",
       "groups": [
-        "JC",
-        "Groupmate"
+        "CCA"
       ],
-      "phone": "83278152",
-      "index": 8,
+      "phone": "88685295",
       "modules": [
-        "UTC1409",
-        "CS2105",
-        "EN3224",
-        "IS2103",
-        "CS2102",
-        "GE2103"
+        {
+          "moduleCode": "CE2155",
+          "lessons": [
+            {
+              "startHour": 14,
+              "endHour": 16,
+              "day": "FRIDAY"
+            },
+            {
+              "startHour": 18,
+              "endHour": 19,
+              "day": "MONDAY"
+            },
+            {
+              "startHour": 16,
+              "endHour": 18,
+              "day": "TUESDAY"
+            }
+          ]
+        },
+        {
+          "moduleCode": "CE2003",
+          "lessons": [
+            {
+              "startHour": 16,
+              "endHour": 17,
+              "day": "THURSDAY"
+            }
+          ]
+        },
+        {
+          "moduleCode": "BT2103",
+          "lessons": [
+            {
+              "startHour": 19,
+              "endHour": 21,
+              "day": "TUESDAY"
+            }
+          ]
+        },
+        {
+          "moduleCode": "CS2103",
+          "lessons": [
+            {
+              "startHour": 14,
+              "endHour": 16,
+              "day": "WEDNESDAY"
+            }
+          ]
+        },
+        {
+          "moduleCode": "CS2108",
+          "lessons": [
+            {
+              "startHour": 18,
+              "endHour": 19,
+              "day": "TUESDAY"
+            },
+            {
+              "startHour": 15,
+              "endHour": 17,
+              "day": "MONDAY"
+            },
+            {
+              "startHour": 11,
+              "endHour": 12,
+              "day": "WEDNESDAY"
+            }
+          ]
+        },
+        {
+          "moduleCode": "CS2100",
+          "lessons": [
+            {
+              "startHour": 11,
+              "endHour": 13,
+              "day": "FRIDAY"
+            },
+            {
+              "startHour": 12,
+              "endHour": 14,
+              "day": "TUESDAY"
+            }
+          ]
+        }
       ]
     }
   ]

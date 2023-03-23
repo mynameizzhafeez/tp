@@ -21,15 +21,14 @@
   },
   "persons": [
     {
-      "name": "Joo Rong",
-      "email": "joorong@gmail.com",
-      "telegramHandle": "@joorong",
-      "address": "Jurong East",
+      "name": "Ford Canning",
+      "email": "fordcanning@gmail.com",
+      "telegramHandle": "@fordcanning",
+      "address": "Fort Canning",
       "groups": [
-        "NS"
+        "TA"
       ],
-      "phone": "94044861",
-      "index": 65,
+      "phone": "88032666",
       "modules": [
         "CS2100",
         "DSAIS1101"
