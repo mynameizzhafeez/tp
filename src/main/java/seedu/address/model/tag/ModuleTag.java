@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import seedu.address.model.commitment.Lesson;
@@ -20,7 +21,7 @@ public class ModuleTag extends Tag implements Comparable<ModuleTag> {
     public static final String MESSAGE_CONSTRAINTS =
             "NUS Modules should have 2 - 4 letter prefix, followed by 4 digits and optional 1 - 3 alphabets";
 
-    public static final String VALIDATION_REGEX = "[A-Z]{2,4}[0-9]{4}[A-Z]{0,3}";
+    public static final Pattern VALIDATION_REGEX = Pattern.compile("[A-Z]{2,4}[0-9]{4}[A-Z]{0,3}");
 
     private final Set<Lesson> lessons;
 
@@ -32,6 +33,7 @@ public class ModuleTag extends Tag implements Comparable<ModuleTag> {
     public ModuleTag(String moduleCode) {
         super(moduleCode);
         requireNonNull(moduleCode);
+        System.out.println(moduleCode);
         checkArgument(isValidTagName(moduleCode), MESSAGE_CONSTRAINTS);
         this.lessons = new HashSet<>();
     }
@@ -100,11 +102,11 @@ public class ModuleTag extends Tag implements Comparable<ModuleTag> {
 
     @Override
     boolean isValidTagName(String test, String regex) {
-        return VALIDATION_REGEX.matches(test);
+        return VALIDATION_REGEX.matcher(test).matches();
     }
 
     public static boolean isValidTagName(String test) {
-        return VALIDATION_REGEX.matches(test);
+        return VALIDATION_REGEX.matcher(test).matches();
     }
 
     @Override

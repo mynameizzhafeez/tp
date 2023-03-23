@@ -24,6 +24,8 @@ public class TimePeriod implements Schedulable {
      * Constructs a period in time.
      */
     public TimePeriod(LocalTime startTime, LocalTime endTime, Day day) {
+        System.out.println(startTime);
+        System.out.println();
         if (!isValidTimePeriod(startTime, endTime, day)) {
             throw new InvalidTimeException("Start Time Cannot be after End Time!");
         }

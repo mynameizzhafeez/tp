@@ -3,8 +3,6 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -16,7 +14,6 @@ import java.util.stream.Collectors;
 import org.joda.time.LocalTime;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.commitment.Lesson;
 import seedu.address.model.person.Address;
@@ -175,10 +172,17 @@ public class ParserUtil {
     public static ModuleTag parseModuleTag(String tag) throws ParseException {
         requireNonNull(tag);
 
-        final Matcher matcher = MODULE_TAG_ARGUMENTS_VALIDATION_REGEX.matcher(tag.trim());
+        String trimmedTag = tag.trim();
+        final Matcher matcher = MODULE_TAG_ARGUMENTS_VALIDATION_REGEX.matcher(trimmedTag);
+
+        final Matcher backupMatcher = ModuleTag.VALIDATION_REGEX.matcher(trimmedTag);
+
+        if (!matcher.matches() && !backupMatcher.matches()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+        }
 
         if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            return new ModuleTag(trimmedTag);
         }
 
         final String moduleCode = matcher.group("moduleCode");
