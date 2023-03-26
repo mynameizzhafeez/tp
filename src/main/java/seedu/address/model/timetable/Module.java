@@ -3,6 +3,8 @@ package seedu.address.model.timetable;
 import java.util.ArrayList;
 import java.util.List;
 
+import seedu.address.model.commitment.Lesson;
+
 /**
  * Represents a module in NUS.
  */

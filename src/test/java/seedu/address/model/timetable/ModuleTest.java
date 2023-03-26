@@ -13,6 +13,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.commitment.Lesson;
+
 class ModuleTest {
     @Test
     public void initialise_onlyModuleCode_success() {
