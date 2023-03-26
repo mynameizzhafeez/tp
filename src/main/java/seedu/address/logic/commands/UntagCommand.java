@@ -106,7 +106,6 @@ public class UntagCommand extends Command {
 
         model.getObservablePersonList().forEach(person ->
                 person.setCommonModules(editedUser.getImmutableModuleTags()));
-        
         String message = String.format(MESSAGE_UNTAG_USER_SUCCESS
                 + "Name: " + editedUser.getName().toString() + '\n'
                 + "Modules: " + editedUser.getImmutableModuleTags().toString());
