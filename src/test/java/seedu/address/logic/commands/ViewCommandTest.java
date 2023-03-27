@@ -53,10 +53,18 @@ public class ViewCommandTest {
         ViewCommandResult result1 = command1.execute(model);
         ViewCommandResult result2 = command2.execute(model);
         ViewCommandResult result3 = command3.execute(model);
+<<<<<<< HEAD
 
         assertEquals(Optional.of(DAKOTA), result1.getDisplayPerson());
         assertEquals(Optional.of(EDWARD), result2.getDisplayPerson());
         assertEquals(Optional.of(FORD), result3.getDisplayPerson());
+=======
+
+        assertEquals(Optional.of(DAKOTA), result1.getDisplayPerson());
+        assertEquals(Optional.of(EDWARD), result2.getDisplayPerson());
+        assertEquals(Optional.of(FORD), result3.getDisplayPerson());
+
+>>>>>>> master
         assertNotEquals("No such name found!", result1.getFeedbackToUser());
     }
 

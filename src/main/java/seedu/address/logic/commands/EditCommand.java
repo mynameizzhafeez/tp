@@ -104,8 +104,7 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateObservablePersonList();
-        return new ViewCommandResult(
-                String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson), editedPerson);
+        return new ViewCommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson), editedPerson);
     }
 
     /**
@@ -123,8 +122,7 @@ public class EditCommand extends Command {
         model.getObservablePersonList().forEach(person -> person.setCommonModules(userModuleTags));
 
         model.setUser(editedUser);
-        return new ViewCommandResult(
-                String.format(MESSAGE_EDIT_USER_SUCCESS, editedUser), editedUser);
+        return new ViewCommandResult(String.format(MESSAGE_EDIT_USER_SUCCESS, editedUser), editedUser);
     }
 
     /**

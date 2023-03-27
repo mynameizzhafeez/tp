@@ -13,7 +13,11 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+<<<<<<< HEAD
 import seedu.address.logic.commands.results.CommandResult;
+=======
+import seedu.address.logic.commands.results.ViewCommandResult;
+>>>>>>> master
 import seedu.address.model.EduMateHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -44,7 +48,7 @@ class IndexHandlerTest {
     @Test
     public void execute_missingIndexInBetween_assignLowestPossibleIndex() throws CommandException {
         new DeleteCommand(new ContactIndex(2)).execute(model);
-        CommandResult viewResult = new ViewCommand(null, new ContactIndex(2)).execute(model);
+        ViewCommandResult viewResult = new ViewCommand(null, new ContactIndex(2)).execute(model);
         assertEquals("No such person found!", viewResult.getFeedbackToUser());
         IndexHandler indexHandler = new IndexHandler(model);
         assertEquals(indexHandler.assignIndex(), new ContactIndex(2));
@@ -53,7 +57,7 @@ class IndexHandlerTest {
     @Test
     public void execute_missingIndexInBetween2_assignLowestPossibleIndex() throws CommandException {
         new DeleteCommand(new ContactIndex(5)).execute(model);
-        CommandResult viewResult = new ViewCommand(null, new ContactIndex(5)).execute(model);
+        ViewCommandResult viewResult = new ViewCommand(null, new ContactIndex(5)).execute(model);
         assertEquals("No such person found!", viewResult.getFeedbackToUser());
         IndexHandler indexHandler = new IndexHandler(model);
         assertEquals(indexHandler.assignIndex(), new ContactIndex(5));

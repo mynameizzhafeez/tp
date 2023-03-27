@@ -16,6 +16,11 @@ public class CommandResultTest {
     private static final CommandResult COMMAND_RESULT = new CommandResult(FEEDBACK);
     private static final ExitCommandResult EXIT_COMMAND_RESULT = new ExitCommandResult(FEEDBACK);
     private static final HelpCommandResult HELP_COMMAND_RESULT = new HelpCommandResult(FEEDBACK);
+<<<<<<< HEAD
+=======
+    private static final LoadCommandResult LOAD_COMMAND_RESULT = new LoadCommandResult(FEEDBACK, FILE_PATH);
+    private static final SaveCommandResult SAVE_COMMAND_RESULT = new SaveCommandResult(FEEDBACK, FILE_PATH);
+>>>>>>> master
 
     @Test
     public void equals() {
@@ -37,7 +42,18 @@ public class CommandResultTest {
         // different Command Result types -> returns false
         assertNotEquals(COMMAND_RESULT, EXIT_COMMAND_RESULT);
         assertNotEquals(COMMAND_RESULT, HELP_COMMAND_RESULT);
+<<<<<<< HEAD
         assertNotEquals(EXIT_COMMAND_RESULT, HELP_COMMAND_RESULT);
+=======
+        assertNotEquals(COMMAND_RESULT, LOAD_COMMAND_RESULT);
+        assertNotEquals(COMMAND_RESULT, SAVE_COMMAND_RESULT);
+        assertNotEquals(EXIT_COMMAND_RESULT, HELP_COMMAND_RESULT);
+        assertNotEquals(EXIT_COMMAND_RESULT, LOAD_COMMAND_RESULT);
+        assertNotEquals(EXIT_COMMAND_RESULT, SAVE_COMMAND_RESULT);
+        assertNotEquals(HELP_COMMAND_RESULT, LOAD_COMMAND_RESULT);
+        assertNotEquals(HELP_COMMAND_RESULT, SAVE_COMMAND_RESULT);
+        assertNotEquals(LOAD_COMMAND_RESULT, SAVE_COMMAND_RESULT);
+>>>>>>> master
     }
 
     @Test
@@ -51,7 +67,18 @@ public class CommandResultTest {
         // different Command Result types -> returns different hashcode
         assertNotEquals(COMMAND_RESULT.hashCode(), EXIT_COMMAND_RESULT.hashCode());
         assertNotEquals(COMMAND_RESULT.hashCode(), HELP_COMMAND_RESULT.hashCode());
+<<<<<<< HEAD
         assertNotEquals(EXIT_COMMAND_RESULT.hashCode(), HELP_COMMAND_RESULT.hashCode());
+=======
+        assertNotEquals(COMMAND_RESULT.hashCode(), LOAD_COMMAND_RESULT.hashCode());
+        assertNotEquals(COMMAND_RESULT.hashCode(), SAVE_COMMAND_RESULT.hashCode());
+        assertNotEquals(EXIT_COMMAND_RESULT.hashCode(), HELP_COMMAND_RESULT.hashCode());
+        assertNotEquals(EXIT_COMMAND_RESULT.hashCode(), LOAD_COMMAND_RESULT.hashCode());
+        assertNotEquals(EXIT_COMMAND_RESULT.hashCode(), SAVE_COMMAND_RESULT.hashCode());
+        assertNotEquals(HELP_COMMAND_RESULT.hashCode(), LOAD_COMMAND_RESULT.hashCode());
+        assertNotEquals(HELP_COMMAND_RESULT.hashCode(), SAVE_COMMAND_RESULT.hashCode());
+        assertNotEquals(LOAD_COMMAND_RESULT.hashCode(), SAVE_COMMAND_RESULT.hashCode());
+>>>>>>> master
     }
 
     @Test

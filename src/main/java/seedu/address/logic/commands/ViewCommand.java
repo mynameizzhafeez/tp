@@ -56,6 +56,11 @@ public class ViewCommand extends Command {
 
     /**
      * Retrieves either a Person by its index or name or the User itself.
+<<<<<<< HEAD
+=======
+     * @param model {@code Model} which the command should operate on.
+     * @return
+>>>>>>> master
      */
     public Optional<Person> retrievePerson(Model model) {
         List<Person> personList = model.getObservablePersonList();

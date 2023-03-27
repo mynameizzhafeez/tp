@@ -12,6 +12,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -33,6 +34,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.ContactIndex;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.User;
+import seedu.address.model.recommendation.Recommendation;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TypicalUser;
 
@@ -202,6 +204,36 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasRecommendation(Recommendation recommendation) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteRecommendation(Recommendation target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Recommendation addRecommendation(Recommendation recommendation) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setRecommendation(Recommendation target, Recommendation editedRecommendation) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setRecommendations(List<Recommendation> recommendations) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetRecommendations() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public User getUser() {
             return TypicalUser.LINUS;
         }
@@ -229,6 +261,26 @@ public class AddCommandTest {
         @Override
         public void updateObservablePersonList() {
             return;
+        }
+
+        @Override
+        public ObservableList<Recommendation> getObservableRecommendationList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateObservableRecommendationList(Predicate<Recommendation> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateObservableRecommendationList(Comparator<Recommendation> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateObservableRecommendationList() {
+            throw new AssertionError("This method should not be called.");
         }
     }
 
