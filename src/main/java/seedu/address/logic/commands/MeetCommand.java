@@ -64,7 +64,7 @@ public class MeetCommand extends Command {
         model.setRecommendations(recommendations);
         model.updateObservableRecommendationList();
 
-        return new CommandResult("");
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 
     @Override
