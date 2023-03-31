@@ -20,7 +20,7 @@ import seedu.address.model.commitment.Lesson;
 public class ModuleTag extends Tag implements Comparable<ModuleTag> {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "NUS Modules should have 2 - 3 letter prefix, followed by 4 digits and optional 1 - 3 alphabets";
+            "NUS Modules should have s 2 - 3 letter prefix, followed by 4 digits and optional 1 - 3 alphabets";
     public static final String VALIDATION_REGEX = "[A-Z]{2,4}[0-9]{4}[A-Z]{0,3}";
 
     private final Set<Lesson> lessons;

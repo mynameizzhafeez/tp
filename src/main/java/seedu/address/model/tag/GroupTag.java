@@ -11,8 +11,10 @@ import java.util.regex.Pattern;
  */
 public class GroupTag extends Tag implements Comparable<GroupTag> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Group Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_CONSTRAINTS = "Group Tags names should be alphanumeric,"
+            + " have a length of at most 10,"
+            + " and not be blank.";
+    public static final String VALIDATION_REGEX = "\\p{Alnum}{1,10}";
 
     /**
      * Constructs a {@code GroupTag}.

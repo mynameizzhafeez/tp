@@ -11,8 +11,9 @@ public class Phone implements Comparable<Phone> {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be at least 3 digits long";
-    public static final String VALIDATION_REGEX = "\\d{3,}";
+            "Phone numbers should only contain numbers,"
+                    + " with length of between 3 and 15 digits long.";
+    public static final String VALIDATION_REGEX = "\\d{3,15}";
 
     private final String value;
 
