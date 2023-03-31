@@ -10,7 +10,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class TelegramHandle implements Comparable<TelegramHandle> {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Telegram Handle should not be blank and should start with @ symbol";
+            "Telegram Handle should start with the @ symbol,"
+                    + " contain only alphanumeric values,"
+                    + " and not be blank.";
 
     /*
      * The first character of the station must not be a whitespace,
