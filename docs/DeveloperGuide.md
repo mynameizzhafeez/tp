@@ -26,7 +26,7 @@ title: Developer Guide
    * [Model Component](#model-component)
      * [Person](#person)
          * [Name](#name)
-         * [Address](#address)
+         * [Station](#station)
          * [Phone](#phone)
          * [Email](#email)
          * [Telegram Handle](#telegram-handle)
@@ -37,7 +37,13 @@ title: Developer Guide
          * [Module Tag](#module-tag)
      * [Time](#time)
        * [Day](#day)
-       * [TimePeriod](#timeperiod)
+       * [HourBlock](#hourblock)
+       * [TimeBlock](#timeblock)
+     * [Location](#location)
+       * [DistanceUtil](#distance-util)
+       * [LocationDataUtil](#location-data-util)
+     * [Commitment](#commitment)
+       * [Lesson](#lesson)
      * [Timetable](#timetable)
        * [Module](#module)
      * [Utils](#utils)
@@ -58,11 +64,12 @@ title: Developer Guide
        * [Argument Multimap](#argument-multimap)
        * [Prefix](#prefix)
      * [Recommenders](#recommenders)
-       * [Timing Recommender](#timingRecommender)
+       * [Timing Recommender](#timing-recommender)
        * [Location Recommender](#location-recommender)
+       * [Location Tracker](#location-tracker)
    * [Storage Component](#storage-component)
-   * [Commons Component](#common-classes)
-     * [MathUtil](#math-util)
+   * [Commons Classes](#common-classes)
+     * [MathUtil](#mathutil)
 5. [Testing](#5-testing)
    * [Unit Tests](#unit-tests)
    * [Testing Models](#testing-models)
@@ -250,7 +257,7 @@ For example, `Bee Shan|81121128|beeshan@gmail.com|200 Bishan Road|@beeshan|NS CC
 | Name            | Bee Shan                                |
 | Phone           | 81121128                                |
 | Email           | beeshan@gmail.com                       |
- | Address         | 200 Bishan Road                         |
+ | Station         | 200 Bishan Road                         |
  | Telegram Handle | @beeshan                                |
  | Groups          | NS, CCA                                 |
  | Modules         | CS3242, BT3101, CS1010E, CS3219, CE3165 |
@@ -360,8 +367,9 @@ The `UI` component,
     <b>Figure 4.3.1</b> Activity Diagram for UP and DOWN keys
 </div>
 
-
-The `UP` and `DOWN` keys have been mapped to return previously typed commands by the user.
+<br>
+The UP and DOWN keys have been mapped to return previously typed commands by the user.<br> <br>
+The above activity diagram does not include the mapping of the UP and DOWN keys to return previously typed commands by the user in order to avoid excessive complexity and maintain clarity. It is important to note that when the user has pre-existing text in the input field or has made edits to previous commands, the UP and DOWN keys will function as expected to prevent accidental deletion of user input.
 
 ---
 
@@ -395,7 +403,7 @@ The `Model` component,
 
 Represents the name of the user or the contact in `EduMate`.
 
-#### **Address**
+#### **Station**
 
 Represents the nearest MRT station to the user or contact's home.
 
@@ -445,6 +453,81 @@ objects which is then used elsewhere in the codebase.
 #### **TimeBlock**
 `TimeBlock` is an object which can represent any (non-negative) hour of time.
 
+### **Location**
+
+A `Location` represents a point in Singapore. We use them to recommend places for the user to meet up with friends. It consists of a latitude (how far north it is), and a longitude (how far east it is).
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: **Restrictions on location attributes:**<br>
+
+* Latitude: must be between *1.23776* and *1.47066*
+* Longitude: must be between *103.61751* and *104.04360*
+
+This is to ensure that the location falls within the bounds of Singapore.
+
+</div>
+
+<div markdown="block" class="alert alert-success">
+
+:heavy_check_mark: **The location can be *named* or *unnamed*:**<br>
+
+* *Named locations* are meant for actual locations in Singapore. For example, we may have "Bishan", "NUS", and "Suntec City".
+* *Unnamed locations* are reserved for computational purposes. For example, a location in between "Bishan" and "Ang Mo Kio" may be used to recommend suitable meet up locations.
+
+</div>
+
+There are also two other classes within the `location` package that help to process this data.
+
+#### Distance Util
+
+The `DistanceUtil` class deals with computing the distances between locations. It is used by the following classes:
+
+* It is used by the [Recommenders](#recommenders) to suggest ideal and central locations for people to meet.
+* It is used by the [LocationTrackers](#location-tracker) to give us approximate locations for a person.
+
+#### Location Data Util
+
+The `LocationDataUtil` class deals with reading and parsing location data from files. For example, the set of destinations to eat and study are stored in the [resources/data](https://github.com/AY2223S2-CS2103T-W14-2/tp/tree/master/src/main/resources/data) folder and are saved within this class. We also store the locations of MRT stations, which allow us to convert user-inputted strings into named locations.
+
+<div markdown="block" class="alert alert-primary">
+
+:bulb: **Tips for using Locations:**
+
+Notice that locations are immutable. This allows us to pass around locations as references, thereby reducing the amount of data we need to store.
+
+</div>
+
+### **Commitment**
+
+A `Commitment` is something that a person needs to do at a certain time and place. Notice that we can only create `Lesson`s at the moment. Having this as a separate class can allow us to easily extend this application to fit more kinds of commitments.
+
+<img src="images/CommitmentClassDiagram.svg" style="width:80%;margin:0 10%">
+<div style="width:80%;margin:0 10%;text-align:center">
+    <b>Figure 4.4.1</b> Class Diagram for Commitment Components
+</div>
+<br>
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: **What are commitments used for** <br>
+
+* They tell us when the person is unavailable, so that we do not recommend inappropriate timings.
+* They tell us where the person is expected to be at a particular time, so that we can recommend better locations to meet up. 
+
+</div>
+
+#### **Lesson**
+
+`Lesson` is inherited from `Commitment`, and represents a time and location that a person is attending a class. In addition, `Lesson` stores the module code for the lesson. For example, a person takes CS2040S on Monday at 9AM for 2 hours.
+
+<div markdown="span" class="alert alert-dark">
+
+:construction: **Potential extensions**
+Currently, all `Lessons` are in NUS, but this can be improved upon in the future, by adding additional arguments to the `tag` command.
+
+</div>
+
 ### **Timetable**
 
 The `Timetable` represents the daily schedule of the user or contact.
@@ -458,9 +541,20 @@ The `Timetable` represents the daily schedule of the user or contact.
 For each `Day` in the `Timetable`, there are 15 `HourBlock` objects each representing an hour starting from 8 AM - 9 AM and ending at 10 PM - 11 PM.
 
 ### **Utils**
+
 #### **Sample Data Util**
 
-{Hafeez please}
+The `SampleDataUtil` class deals with reading and parsing persons data from a file. In particular, these are the people that will appear upon first load of EduMate, as well as during the execution of `SampleCommand`. The sample data is stored within [this file](https://github.com/AY2223S2-CS2103T-W14-2/tp/blob/master/src/main/resources/data/sampleData.txt).
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tips for reading the sample data:**<br>
+
+* Each row of data corresponds to a single person, and their fields are separated by the `|`, also known as the "pipe" character.
+* The attributes are: `NAME|PHONE|EMAIL|ADDRESS|TELEGRAM_HANDLE|GROUP_TAGS|MODULE_TAGS`.
+* Notice that the `MODULE_TAGS` are separated by a comma `,` instead, as its parser uses spaces to separate out the arguments. 
+
+</div>
 
 ---
 
@@ -497,7 +591,7 @@ The `add` command allows users to create a new person and insert them into the a
 
 :information_source: **Command Formats:** <br>
 
-* `add n/NAME p/PHONE a/ADDRESS e/EMAIL t/TELEGRAM [g/GROUP]…​ [m/MODULE]…​`
+* `add n/NAME p/PHONE s/STATION e/EMAIL t/TELEGRAM [g/GROUP]…​ [m/MODULE]…​`
 
 </div>
 
@@ -690,7 +784,9 @@ For example, if the user wants to search for a person but does not know the full
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:**
-This command can be used before the other commands to return a list of contacts the user wants to work with. 
+* This command can be used before the other commands to return a list of contacts the user wants to work with.
+* The `find` command returns a filtered list, so command operations only work on persons present in the filtered list.<br>
+  e.g. If the filtered list does not contain any person with contact index 2, any operation relating to contact index 2 will throw error.
 
 </div>
 
@@ -844,20 +940,20 @@ The `ArgumentMultimap` utilises a `HashMap` to store an `ArrayList<String>` of a
 
 #### **Prefix**
 
-The `Prefix` is an `enum` consisting of `n/` ,`a/`, `p/`, `t/`, `e/`, `g/`, `m/` and a blank `Prefix` which is an empty String. The Prefixes listed previously correspond to [Name](#name), [Address](#address), [Phone](#phone), [Telegram Handle](#telegram-handle), [Email](#email), [Group Tags](#group-tag) and [Module Tags](#module-tag)).
+The `Prefix` is an `enum` consisting of `n/` ,`s/`, `p/`, `t/`, `e/`, `g/`, `m/` and a blank `Prefix` which is an empty String. The Prefixes listed previously correspond to [Name](#name), [Station](#station), [Phone](#phone), [Telegram Handle](#telegram-handle), [Email](#email), [Group Tags](#group-tag) and [Module Tags](#module-tag)).
 
 ## **Recommenders**
 
-**API** : `Recommender.java` {to be filled in}
+**API** : `Recommender.java`
 
-<img src="images/RecommenderClass.svg" style="width:80%;margin:0 10%">
+<img src="images/RecommenderClassDiagram.svg" style="width:80%;margin:0 10%">
 <div style="width:80%;margin:0 10%;text-align:center">
     <b>Figure 4.6</b> Class Diagram for Recommender Module
 </div>
 <br>
 
 The `Recommender` component,
-* consists of 3 sub-components (modules) : `TimingRecommender`, `LocationRecommender` and `LocationTracker`.
+* consists of 2 sub-components (modules) : `LocationRecommender` and `TimingRecommender`
 * recommends timing and location of meetups for relevant participants and the user.
 
 How the `Recommender` Component works:
@@ -870,7 +966,7 @@ How the `Recommender` Component works:
 7. The `LocationRecommender` recommends optimal meeting points based on the locations provided by the `LocationTracker`s.
 8. Feedbacks to user the recommended meetup locations and timings.
 
-<img src="images/RecommenderSequenceDiagram.png" style="width:80%;margin:0 10%">
+<img src="images/RecommenderSequenceDiagram.svg" style="width:80%;margin:0 10%">
 <div style="width:80%;margin:0 10%;text-align:center">
     <b>Figure 4.6.1</b> Sequence Diagram for Recommender Module
 </div>
@@ -883,7 +979,7 @@ will be free so that a meetup could be scheduled.
 
 <img src="images/SchedulerActivity.svg" style="width:60%;margin:0 20%">
 <div style="width:60%;margin:0 20%;text-align:center">
-    <b>Figure 4.6.2</b> Activity Diagram for <code>TimingRecommender</code>
+    <b>Figure 4.6.1</b> Activity Diagram for <code>TimingRecommender</code>
 </div>
 
 <div markdown="span" class="alert alert-info">
@@ -949,6 +1045,10 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
+### **MathUtil**
+
+The `MathUtil` class contains generic functions for mathematical operations such as Cartesian Product and indexing.
+
 # **5. Testing**
 
 ---
@@ -979,11 +1079,13 @@ Positive and negative test cases were mainly used to test parsers.
 ---
 
 ## **Measuring Coverage of Integration Tests**
-{to be filled}
+We have used `Jacoco` and `Codecev` to monitor the code coverage of integration tests. 
+
 ### **Create Code Coverage Report**
-{to be filled}
+Refer to the [documentation](https://docs.codecov.com/docs) on setting up `Codecev` for setting up on CI/CD.
+
 ### **Read Code Coverage Report**
-{to be filled}
+For more information, check [this](https://github.com/apps/codecov). The above [link](https://docs.codecov.com/docs) also contains information on this.
 
 ---
 
@@ -1314,7 +1416,7 @@ testers are expected to do more *exploratory* testing.
 
 ### **Add a new person**
 
-`add n/Thomas a/Bedok p/12345678 e/thomas@gmail.com t/@thomas`
+`add n/Thomas s/Bedok p/12345678 e/thomas@gmail.com t/@thomas`
 
 Expected Output in the Person List: New person added to EduMate.
 
@@ -1351,7 +1453,7 @@ Expected Output in Profile Panel: The user's name is changed to Gordon.
 
 Expected Output in the Person List: The fourth person has been removed, and there is no fourth index.
 
-`delete 4`, `add n/James e/james@gmail.com t/@james a/Bishan p/87654321`
+`delete 4`, `add n/James e/james@gmail.com t/@james s/Bishan p/87654321`
 
 Expected Output in the Person List: New person has been added to EduMate, with an index of 4.
 
@@ -1408,6 +1510,10 @@ Expected Output in Person List: All contacts that have the word 'Albert' in thei
 `find m/CS2103T`
 
 Expected Output in Person List: All contacts with CS2103T tag under `Module`.
+
+`find n/Albert m/CS2103T`
+
+Expected Output in Person List: All contacts that have the word 'Albert' in their name and CS2103T tag under `Module`.
 
 ### **Arrange persons by criteria**
 
